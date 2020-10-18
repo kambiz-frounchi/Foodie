@@ -1,5 +1,5 @@
 const db = require("../models");
 
-// Defining methods for the recipeController
+// Defining methods for the usersController
 module.exports = {
 };
