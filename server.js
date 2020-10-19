@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,6 +15,15 @@ if (process.env.NODE_ENV === "production") {
 
 // Add routes, both API and view
 app.use(routes);
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/foodie", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
+
 
 // Send every other request to the React app
 // Define any API routes before this runs
