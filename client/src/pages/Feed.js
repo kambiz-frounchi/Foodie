@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 
-function Recipe () {
+function Feed () {
     return null;
 }
 
-export default Recipe;
+export default Feed;
