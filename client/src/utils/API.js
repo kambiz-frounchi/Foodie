@@ -1,24 +1,12 @@
 import axios from "axios";
 
-/*
-/api/user/status/:userid: to change the status of a given user
-/api/recipes: GET recipes posted by all users/ POST a new recipe
-/api/recipes/user/:userid: GET recipes posted by a given user
-/api/recipes/:id : for GET/PUT/DELETE
-/api/recipes/find: POST: finds recipe based on given ingredients
-/api/recipes/like/:recipeid: POST: adds a like/unlike to a given recipe
-/api/recipes/comment/:recipeid: POST/PUT/DELETE: add/modifies a comment to a given recipe [nice to have]
-/api/signup
-/api/login
-*/
-
 export default {
   // Gets a user's info (nickname, email, status, recipes)
   getUser: function(userid) {
     return axios.get(`/api/user/${userid}`);
   },
   setUserStatus: function(userid, statusString) {
-    return axios.post(`/api/user/status/${userid}`, statusString;
+    return axios.post(`/api/user/status/${userid}`, statusString);
   },
   // Gets all recipes
   getAllRecipes: function() {
@@ -38,7 +26,7 @@ export default {
   },
   // Update a recipe
   getRecipe: function(id, recipeData) {
-    return axios.put(`/api/recipes/${id}`);
+    return axios.put(`/api/recipes/${id}`, recipeData);
   },
   // Deletes a specific recipe
   deleteBook: function(id) {
