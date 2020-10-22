@@ -28,10 +28,28 @@ const recipeSchema = new Schema({
   likes: {
     type: Number
   },
-  cuisine: cuisineSchema,
-  ingredients: [ingredientSchema],
-  tags: [tagSchema],
-  comments: [commentSchema]
+  cuisine: {
+    type: Schema.Types.ObjectId,
+    ref: "Cuisine"
+  },
+  ingredients: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Ingredient"
+    }
+  ],
+  tags: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tag"
+    }
+  ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
 });
 
 const Recipe = model("Recipe", recipeSchema);
