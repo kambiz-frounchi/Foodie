@@ -25,11 +25,11 @@ export default {
     return axios.get(`/api/recipes/${id}`);
   },
   // Update a recipe
-  getRecipe: function(id, recipeData) {
+  updateRecipe: function(id, recipeData) {
     return axios.put(`/api/recipes/${id}`, recipeData);
   },
   // Deletes a specific recipe
-  deleteBook: function(id) {
+  deleteRecipe: function(id) {
     return axios.delete(`/api/recipes/${id}`);
   },
   // Finds a recipe based on search data (ingredients)
