@@ -1,5 +1,4 @@
 const db = require("../models");
-const { Tag } = require("../models/tag");
 
 // Defining methods for the recipesController
 module.exports = {
@@ -12,19 +11,21 @@ module.exports = {
   create: function (req, res) {
     addIngredients(req.body.ingredients).then((ingredients) => {
       addTags(req.body.tags).then((tags) => {
-        db.Recipe.create({
-          userId: req.body.userId,
-          createdDate: req.body.createdDate,
-          name: req.body.name,
-          image: req.body.image,
-          time: req.body.time,
-          difficulty: req.body.difficulty,
-          // cuisine: cuisine,
-          ingredients: ingredients,
-          tags: tags,
-        })
-          .then((dbModel) => res.json(dbModel))
-          .catch((err) => res.status(422).json(err));
+        addCuisine(req.body.cuisine).then((cuisine) => {
+          db.Recipe.create({
+            userId: req.body.userId,
+            createdDate: req.body.createdDate,
+            name: req.body.name,
+            image: req.body.image,
+            time: req.body.time,
+            difficulty: req.body.difficulty,
+            cuisine: cuisine,
+            ingredients: ingredients,
+            tags: tags,
+          })
+            .then((dbModel) => res.json(dbModel))
+            .catch((err) => res.status(422).json(err));
+        });
       });
     });
   },
@@ -62,4 +63,17 @@ const addIngredients = (ingredients) => {
         });
     })
   );
+};
+
+const addCuisine = (cuisine) => {
+  // See if the cuisine already exists
+  return db.Cuisine.findOne(cuisine)
+    .exec()
+    .then((doc) => {
+      if (doc) {
+        return doc;
+      }
+      // If no cuisine exists, create one
+      return db.Cuisine(cuisine).save(); // Returns a promise
+    });
 };

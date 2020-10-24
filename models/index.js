@@ -3,5 +3,6 @@ module.exports = {
     User: require("./user").User,
     Comment: require("./user").Comment,
     Tag: require("./tag").Tag,
-    Ingredient: require("./ingredient").Ingredient
+    Ingredient: require("./ingredient").Ingredient,
+    Cuisine: require("./cuisine").Cuisine
 };
