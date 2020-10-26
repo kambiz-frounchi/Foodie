@@ -46,12 +46,14 @@ export default {
   },
   // Signup
   signup: function(userData) {
-    // TO DO
-    return null;
+    return axios.post(`/api/users/signup`, userData);
   },
   // Login
   login: function(userData) {
-    // TO DO
-    return null;
+    return axios.post(`/api/users/login`, userData);
+  },
+  // Logout
+  logout: function(userData) {
+    return axios.post(`/api/users/logout`, userData);
   }
 };

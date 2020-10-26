@@ -1,17 +1,6 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-
-// Matches with "/api/recipes"
-//router.route("/")
-//.get(recipesController.findAll)
-//.post(recipesController.create);
-
-// Matches with "/api/recipes/:id"
-//router
-//  .route("/:id")
-//.get(recipesController.findById)
-//.put(recipesController.update)
-//.delete(recipesController.remove);
+const passport = require("passport");
 
 router.route("/login").post(
   function (req, res, next) {
@@ -30,20 +19,20 @@ router.route("/login").post(
   }
 );
 
-router.route("/signup").post((req, res) => {
-  console.log(req.user);
-  db.User.create({
-    email: req.body.email,
-    password: req.body.password,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname
-  })
-    .then(() => {
-      res.redirect(307, "/api/login");
-    })
-    .catch(err => {
-      res.status(401).json(err);
-    });
-});
+router
+  .route("/signup")
+  .post(usersController.create);
+
+router
+  .route("/logout")
+  .post(() => {
+    if (req.user) {
+      console.log(`logging out ${req.user.id}`);
+      req.logout();
+      res.send({msg: `${req.user.id} logging out`});
+    } else {
+      res.send({msg: "no user to log out!"});
+    }
+  });
 
 module.exports = router;
