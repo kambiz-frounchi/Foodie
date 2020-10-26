@@ -12,7 +12,4 @@ router.use("/tags", tagsRoutes);
 router.use("/cuisines", cuisinesRoutes);
 router.use("/users", userRoutes);
 
-router.route("/")
-  .get(() => {console.log("hello")});
-
 module.exports = router;

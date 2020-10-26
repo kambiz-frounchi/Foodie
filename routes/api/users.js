@@ -2,6 +2,20 @@ const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 const passport = require("passport");
 
+router.route("/").get(
+  (req, res) => {
+    console.log("processing /api/users");
+    console.log(req.user);
+    if (req.user) {
+      let userInfo = {
+        email: req.user.email,
+        id: req.user.id
+      };
+      res.send({user: userInfo});  
+    }
+  }
+);
+
 router.route("/login").post(
   function (req, res, next) {
     console.log("routes/user.js, login, req.body: ");
@@ -11,7 +25,7 @@ router.route("/login").post(
   passport.authenticate("local"),
   (req, res) => {
     console.log("logged in", req.user);
-    var userInfo = {
+    let userInfo = {
       email: req.user.email,
       id: req.user.id
     };
