@@ -12,6 +12,18 @@ export default {
   getAllRecipes: function() {
     return axios.get("/api/recipes");
   },
+  // Gets all ingredients
+  getAllIngredients: function() {
+    return axios.get("/api/ingredients");
+  },
+  // Gets all cuisines
+  getAllCuisines: function() {
+    return axios.get("/api/cuisines");
+  },
+  // Gets all tags
+  getAllTags: function() {
+    return axios.get("/api/tags");
+  },
   // Get a user's recipes
   getUserRecipes: function(userid) {
     return axios.get(`/api/recipes/user/${userid}`);

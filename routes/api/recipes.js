@@ -2,10 +2,10 @@ const router = require("express").Router();
 const recipesController = require("../../controllers/recipesController");
 
 router.route("/find")
-  .post(recipesController.findAll);
+  .post(recipesController.find);
 
 router.route("/")
-  .get(recipesController.findAll)
+  // .get(recipesController.findAll)
   .post(recipesController.create);
 
 // Matches with "/api/recipes"
