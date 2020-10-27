@@ -15,4 +15,9 @@ module.exports = {
         res.status(422).json(err);
       });
   },
+  findById: async function(req, res) {
+      console.log("findById");
+      console.log(req.user);
+      const dbUser = await db.User.findById(req.user._id);
+  }
 };

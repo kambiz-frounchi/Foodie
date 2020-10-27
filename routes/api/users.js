@@ -7,11 +7,17 @@ router.route("/").get(
     console.log("processing /api/users");
     console.log(req.user);
     if (req.user) {
+      //const user = await usersController.findById(req, res);
+      //console.log(user);
       let userInfo = {
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        //nickname: user.nickname
       };
       res.send({user: userInfo});  
+    }
+    else {
+      res.send({user: {email: "email", id: 0, nickname: "nickname"}});
     }
   }
 );
@@ -24,12 +30,14 @@ router.route("/login").post(
   },
   passport.authenticate("local"),
   (req, res) => {
+    //const user = await usersController.findById(req, res);
     console.log("logged in", req.user);
     let userInfo = {
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
+      //nickname: user.nickname
     };
-    res.send(userInfo);
+    res.send({user: userInfo});
   }
 );
 
@@ -39,11 +47,12 @@ router
 
 router
   .route("/logout")
-  .post(() => {
+  .post((req, res, next) => {
     if (req.user) {
       console.log(`logging out ${req.user.id}`);
+      const userId = req.user.id;
       req.logout();
-      res.send({msg: `${req.user.id} logging out`});
+      res.send({msg: `${userId} logging out`});
     } else {
       res.send({msg: "no user to log out!"});
     }

@@ -1,10 +1,6 @@
 import axios from "axios";
 
 export default {
-  // Gets a user's info (nickname, email, status, recipes)
-  getUser: function(userid) {
-    return axios.get(`/api/user/${userid}`);
-  },
   setUserStatus: function(userid, statusString) {
     return axios.post(`/api/user/status/${userid}`, statusString);
   },

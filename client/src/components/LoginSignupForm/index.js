@@ -81,6 +81,7 @@ export function LoginForm(props) {
     <form className="login">
       <CommonFormComponents onChange={props.onChange}/>
       <FormBtn onClick={props.onClick}>login</FormBtn>
+      <FormBtn onClick={props.onCreateNewUserClick}>Create New User</FormBtn>
     </form>
   );
 }

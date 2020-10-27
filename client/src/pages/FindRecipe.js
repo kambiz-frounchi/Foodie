@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import API from "../utils/API";
+import React from "react";
 
 function FindRecipe () {
     return null;
