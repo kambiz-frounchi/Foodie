@@ -1,10 +1,6 @@
 import axios from "axios";
 
 export default {
-  // Gets a user's info (nickname, email, status, recipes)
-  getUser: function(userid) {
-    return axios.get(`/api/user/${userid}`);
-  },
   setUserStatus: function(userid, statusString) {
     return axios.post(`/api/user/status/${userid}`, statusString);
   },
@@ -46,12 +42,18 @@ export default {
   },
   // Signup
   signup: function(userData) {
-    // TO DO
-    return null;
+    return axios.post(`/api/users/signup`, userData);
   },
   // Login
   login: function(userData) {
-    // TO DO
-    return null;
+    return axios.post(`/api/users/login`, userData);
+  },
+  // Logout
+  logout: function(userData) {
+    return axios.post(`/api/users/logout`, userData);
+  },
+  // getUser
+  getUser: function() {
+    return axios.get(`/api/users`);
   }
 };

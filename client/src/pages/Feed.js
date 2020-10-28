@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import API from "../utils/API";
 
-function Feed () {
-    return null;
+function Feed(props) {
+  return (
+    <div>
+      <span>Feed Page!</span>
+    </div>
+  );
 }
 
 export default Feed;
