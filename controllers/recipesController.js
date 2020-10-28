@@ -1,9 +1,20 @@
 const db = require("../models");
+const mongoose = require("mongoose");
 
 // Defining methods for the recipesController
 module.exports = {
-  findAll: function (req, res) {
-    db.Recipe.find(req.query)
+  find: function (req, res) {
+    console.log(req.body);
+    const ingredients = req.body.ingredients.map((ingredient) => mongoose.Types.ObjectId(ingredient._id));
+    console.log(ingredients);
+    // This query is not quite working yet
+    const query = {
+      ingredients: {$in: [ingredients]}
+    }
+    console.log(query);
+    db.Recipe.find({
+      query
+    })
       .sort({ createdDate: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
