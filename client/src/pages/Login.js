@@ -22,6 +22,7 @@ function Login() {
       .then((response) => {
         console.log(`login response`);
         console.log(response.data);
+        localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email }));
         setLoggedInState({ ...loggedInState, loggedIn: true, email: response.data.user.email });
         history.push("/");
       })

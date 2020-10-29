@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
   useHistory,
 } from "react-router-dom";
 import logo from "./logo.svg";
@@ -20,7 +21,8 @@ import API from "./utils/API";
 import UserContext from "./utils/userContext";
 
 function App() {
-  const [loggedInState, setLoggedInState] = useState({
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [loggedInState, setLoggedInState] = useState(userInfo ? userInfo : {
     loggedIn: false,
     email: "User",
   });
@@ -32,21 +34,21 @@ function App() {
           <Wrapper>
             <Header />
             <Switch>
-              <Route exact path={["/"]}>
+              <PrivateRoute exact path={["/"]}>
                 <Feed />
-              </Route>
-              <Route exact path={["/recipe/:id"]}>
+              </PrivateRoute>
+              <PrivateRoute exact path={["/recipe/:id"]}>
                 <Recipe />
-              </Route>
-              <Route exact path={["/user"]}>
+              </PrivateRoute>
+              <PrivateRoute exact path={["/user"]}>
                 <UserProfile />
-              </Route>
-              <Route exact path={["/find"]}>
+              </PrivateRoute>
+              <PrivateRoute exact path={["/find"]}>
                 <FindRecipe />
-              </Route>
-              <Route exact path={["/post"]}>
+              </PrivateRoute>
+              <PrivateRoute exact path={["/post"]}>
                 <PostRecipe />
-              </Route>
+              </PrivateRoute>
               <Route exact path={["/signup"]}>
                 <Signup />
               </Route>
@@ -59,6 +61,29 @@ function App() {
       </Router>
     </UserContext.Provider>
   );
+
+  // A wrapper for <Route> that redirects to the login
+  // screen if you're not yet authenticated.
+  function PrivateRoute({ children, ...rest }) {
+    console.log(`Logged in: ${loggedInState.loggedIn}`);
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          loggedInState.loggedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
 }
 
 export default App;
