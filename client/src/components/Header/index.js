@@ -9,8 +9,8 @@ function Header(props) {
   const { loggedInState, setLoggedInState } = useContext(UserContext);
   const history = useHistory();
 
-  console.log(`Header loggedIn=${loggedInState.loggedIn}`);
-  console.log(loggedInState);
+  // console.log(`Header loggedIn=${loggedInState.loggedIn}`);
+  // console.log(loggedInState);
 
   const handleLoginLogout = () => {
     console.log(loggedInState.loggedIn);
@@ -22,6 +22,7 @@ function Header(props) {
         })
         .catch((err) => console.log(err));
     }
+    localStorage.clear();
     setLoggedInState({ ...loggedInState, loggedIn: !loggedInState.loggedIn });
   };
 
