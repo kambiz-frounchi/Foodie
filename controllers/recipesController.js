@@ -16,8 +16,15 @@ module.exports = {
       query
     })
       .sort({ createdDate: -1 })
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
+  },
+  findAll: function (req, res) {
+    console.log(req.body);
+    db.Recipe.find({})
+      .sort({ createdDate: -1 })
+      .then((dbModels) => res.json(dbModels))
+      .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
     addIngredients(req.body.ingredients).then((ingredients) => {
@@ -27,6 +34,7 @@ module.exports = {
             userId: req.body.userId,
             createdDate: req.body.createdDate,
             name: req.body.name,
+            description: req.body.description,
             image: req.body.image,
             time: req.body.time,
             difficulty: req.body.difficulty,
