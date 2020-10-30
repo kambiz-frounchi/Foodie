@@ -9,9 +9,21 @@ mongoose.connect(
 );
 
 const recipeSeed = [
-    {
-        name:  "bestRecipe"
-    }
+  {
+    name:  "bestRecipe1",
+    description: "best recipe ever",
+    image: "image1"
+  },
+  {
+    name:  "bestRecipe2",
+    description: "second best recipe ever",
+    image: "image2"
+  },
+  {
+    name:  "bestRecipe3",
+    description: "third best recipe ever",
+    image: "image3"
+  }
 ];
 
 db.Recipe

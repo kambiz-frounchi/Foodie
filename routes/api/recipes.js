@@ -6,7 +6,7 @@ router.route("/find")
   .post(recipesController.find);
 
 router.route("/")
-  // .get(recipesController.findAll)
+  .get(recipesController.findAll)
   .post(recipesController.create);
 
 // Matches with "/api/recipes"
