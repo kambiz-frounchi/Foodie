@@ -15,7 +15,7 @@ function Wrapper(props) {
           .then((response) => {
             console.log("user");
             console.log(response.data);
-            if (response.data.user.id != 0) {
+            if (response.data.user.id) {
               setLoggedInState({ loggedIn: true, email: response.data.user.email });
               localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email }));
               history.push("/");
