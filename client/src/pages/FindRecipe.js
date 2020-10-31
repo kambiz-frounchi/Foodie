@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import TagControl from "../components/TagControl";
+import FeedRecipe from "../components/FeedRecipe";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
 
 function FindRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [cuisines, setCuisines] = useState([]);
   const [tags, setTags] = useState([]);
   const [formObject, setFormObject] = useState({});
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     loadIngredients();
@@ -46,16 +49,17 @@ function FindRecipe() {
     setFormObject({ ...formObject, ["tagList"]: value });
   }
 
-
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(formObject.ingredientList);
     API.findRecipes({
       ingredients: formObject.ingredientList,
       cuisines: formObject.cuisineList,
       tags: formObject.tagList,
     })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setRecipes(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -63,11 +67,23 @@ function FindRecipe() {
     <div>
       <h1>Find Recipes</h1>
       <br />
-      <TagControl items={ingredients} label="Ingredients" onChange={(event, value) => handleIngredientChange(value)}/>
+      <TagControl
+        items={ingredients}
+        label="Ingredients"
+        onChange={(event, value) => handleIngredientChange(value)}
+      />
       <br />
-      <TagControl items={cuisines} label="Cuisines" onChange={(event, value) => handleCuisineChange(value)}/>
+      <TagControl
+        items={cuisines}
+        label="Cuisines"
+        onChange={(event, value) => handleCuisineChange(value)}
+      />
       <br />
-      <TagControl items={tags} label="Tags" onChange={(event, value) => handleTagChange(value)}/>
+      <TagControl
+        items={tags}
+        label="Tags"
+        onChange={(event, value) => handleTagChange(value)}
+      />
       <br />
       <button
         type="button"
@@ -76,6 +92,30 @@ function FindRecipe() {
       >
         Search
       </button>
+      <Container>
+        {recipes.length ? (
+          <ListGroup>
+            {recipes.map((recipe) => (
+              <ListGroup.Item key={recipe._id}>
+                <Row>
+                  <Col md={4}></Col>
+                  <Col md={4}>
+                    <FeedRecipe
+                      name={recipe.name}
+                      nickname={recipe.user.nickname}
+                      img={recipe.image}
+                      description={recipe.description}
+                    />
+                  </Col>
+                  <Col md={4}></Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        ) : (
+          <h3> Feed is empty </h3>
+        )}
+      </Container>
     </div>
   );
 }

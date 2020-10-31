@@ -5,8 +5,9 @@ const { tagSchema } = require("./tag");
 const { cuisineSchema } = require("./cuisine");
 
 const recipeSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   },
   createdDate: { 
     type: Date,

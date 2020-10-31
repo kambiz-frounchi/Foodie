@@ -4,19 +4,36 @@ const mongoose = require("mongoose");
 // Defining methods for the recipesController
 module.exports = {
   find: function (req, res) {
-    console.log(req.body);
-    const ingredients = req.body.ingredients.map((ingredient) => mongoose.Types.ObjectId(ingredient._id));
-    console.log(ingredients);
-    // This query is not quite working yet
-    const query = {
-      ingredients: {$in: [ingredients]}
+    const query = {};
+
+    console.log("Request body:\n", req.body);
+
+    if (req.body.ingredients && req.body.ingredients.length > 0) {
+      const ingredients = req.body.ingredients.map((ingredient) =>
+        mongoose.Types.ObjectId(ingredient._id)
+      );
+      query.ingredients = { $in: ingredients };
     }
-    console.log(query);
-    db.Recipe.find({
-      query
-    })
+    if (req.body.cuisines && req.body.cuisines.length > 0) {
+      const cuisines = req.body.cuisines.map((cuisine) =>
+        mongoose.Types.ObjectId(cuisine._id)
+      );
+      query.cuisine = { $in: cuisines };
+    }
+    if (req.body.tags && req.body.tags.length > 0) {
+      const tags = req.body.tags.map((tag) => mongoose.Types.ObjectId(tag._id));
+      query.tags = { $in: tags };
+    }
+
+    console.log("Query:\n", query);
+
+    db.Recipe.find(query)
+      .populate("user")
       .sort({ createdDate: -1 })
-      .then((dbModels) => res.json(dbModels))
+      .then((dbModels) => {
+        console.log(dbModels);
+        res.json(dbModels);
+      })
       .catch((err) => res.status(422).json(err));
   },
   findAll: function (req, res) {
@@ -24,14 +41,14 @@ module.exports = {
     db.Recipe.find({})
       .sort({ createdDate: -1 })
       .then((dbModels) => res.json(dbModels))
-      .catch(err => res.status(422).json(err));
+      .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
     addIngredients(req.body.ingredients).then((ingredients) => {
       addTags(req.body.tags).then((tags) => {
         addCuisine(req.body.cuisine).then((cuisine) => {
           db.Recipe.create({
-            userId: req.body.userId,
+            user: req.body.userId,
             createdDate: req.body.createdDate,
             name: req.body.name,
             description: req.body.description,
