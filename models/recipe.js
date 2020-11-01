@@ -27,7 +27,7 @@ const recipeSchema = new Schema({
   },
   difficulty: {
     type: String,
-    enum: ["piece of cake", "some technique required", "master chef level"]
+    enum: ["Piece of Cake", "Some Technique Required", "Master Chef Level"]
   },
   likes: {
     type: Number
