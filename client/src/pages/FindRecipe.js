@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import TagControl from "../components/TagControl";
+import Creatable from "../components/Creatable"
 import FeedRecipe from "../components/FeedRecipe";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 
@@ -67,6 +68,7 @@ function FindRecipe() {
     <div>
       <h1>Find Recipes</h1>
       <br />
+      <Creatable items={ingredients}/>
       <TagControl
         items={ingredients}
         label="Ingredients"
@@ -115,6 +117,8 @@ function FindRecipe() {
         ) : (
           <h3> Feed is empty </h3>
         )}
+        <br/>
+        <br/>
       </Container>
     </div>
   );
