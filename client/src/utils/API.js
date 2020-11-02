@@ -67,5 +67,22 @@ export default {
   // getUser
   getUser: function() {
     return axios.get(`/api/users`);
+  },
+  // upload an image
+  uploadImage: function(image) {
+    const formData = new FormData();
+    console.log("uploadImage");
+    console.log(image);
+    console.log(image.name);
+    formData.append("myimage", image);
+    //formData.append("myimage", image, image.name);
+    
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }
+    console.log("uploading ...");
+    return axios.post(`/api/recipes/upload`, formData, config);
   }
 };

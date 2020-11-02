@@ -15,6 +15,7 @@ import Recipe from "./pages/Recipe";
 import UserProfile from "./pages/UserProfile";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import FileUploadTest from "./pages/FileUploadTest";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 import API from "./utils/API";
@@ -54,6 +55,9 @@ function App() {
               </Route>
               <Route exact path={["/login"]}>
                 <Login />
+              </Route>
+              <Route>
+                <FileUploadTest exact path={"/upload"}/>
               </Route>
             </Switch>
           </Wrapper>

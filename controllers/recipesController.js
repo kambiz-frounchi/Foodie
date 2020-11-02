@@ -43,16 +43,33 @@ module.exports = {
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
+  // create: function(req, res) {
+  //   console.log(req.files);
+  //   console.log(req.body);
+  //   res.json("create completed!");
+  // }
   create: function (req, res) {
     addIngredients(req.body.ingredients).then((ingredients) => {
       addTags(req.body.tags).then((tags) => {
         addCuisine(req.body.cuisine).then((cuisine) => {
+
+          if (req.files && Object.keys(req.files).length) {
+            console.log(req.files);
+            const recipeImageFile = req.files.myimage;
+            const recipeImageSavePath = path.join(__dirname, "../../images/", recipeImageFile.name);
+            recipeImageFile.mv(recipeImageSavePath, err => {
+              if (err) {
+                console.log(err);
+              }
+            });
+          }
+
           db.Recipe.create({
             user: req.body.userId,
             createdDate: req.body.createdDate,
             name: req.body.name,
             description: req.body.description,
-            image: req.body.image,
+            image: recipeImageSavePath,
             time: req.body.time,
             difficulty: req.body.difficulty,
             cuisine: cuisine,
