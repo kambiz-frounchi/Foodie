@@ -5,20 +5,6 @@ import ImageUploader from "react-images-upload";
 
 function FileUpload(props) {
 
-
-  /*
-  function fileSelectHandler(event) {
-    event.preventDefault();
-    console.log(event.target.files[0]);
-    const image = event.target.files[0];
-
-    setImage(image);
-    API.uploadImage(image)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }
-  */
-
   return (
     <ImageUploader
       withIcon={true}
@@ -34,6 +20,19 @@ function FileUpload(props) {
 
 export default FileUpload;
 
+  /*
+  function fileSelectHandler(event) {
+    event.preventDefault();
+    console.log(event.target.files[0]);
+    const image = event.target.files[0];
+
+    setImage(image);
+    API.uploadImage(image)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
+  */
+ 
    /*
       <Form>
           <Form.Group>

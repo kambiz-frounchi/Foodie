@@ -1,97 +1,75 @@
 import React from "react";
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown } from "react-bootstrap";
+import FileUpload from "../FileUpload";
+import { Form, InputGroup, FormControl, Button } from "react-bootstrap";
 
-// This file exports the Input, TextArea, and FormBtn components
-
-export function Input(props) {
+function Input(props) {
   return (
-    <div className="form-group">
-      <label htmlFor="exampleRecipe">{props.name}</label>
-      <input {...props} className="form-control" />
-    </div>
+    <InputGroup className="mb-3">
+    <InputGroup.Prepend>
+      <InputGroup.Text id="basic-addon1">name</InputGroup.Text>
+    </InputGroup.Prepend>
+    <FormControl
+      placeholder={props.name}
+      aria-label={props.name}
+      aria-describedby="basic-addon1"
+      onChange={props.onChange}
+      name={props.name}
+    />
+  </InputGroup>
   );
 }
 
-export function RecipeNameInput(props) {
+function RecipeNameInput(props) {
   return (
-    <div className="form-group">
-      <label htmlFor="exampleRecipe1">Recipe Name</label>
-      <input
-        {...props}
-        name="recipeName"
-        type="string"
-        className="form-control"
-        id="recipe-name"
-        placeholder="Name"
-      />
-    </div>
+    <Input {...props} name="name" ></Input>
   );
 }
-// export function RecipeImageInput(props) {
-//   return (
-    
-//   );
-// }
 
-export function RecipeTimeDropdown(props) {
+function RecipeTimeDropdown(props) {
   return (
-        <Dropdown>
+    <Dropdown onSelect={props.onSelect}>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
         Time
       </Dropdown.Toggle>
-    
+
       <Dropdown.Menu>
-        <Dropdown.Item >10-20</Dropdown.Item>
-        <Dropdown.Item >20-30</Dropdown.Item>
-        <Dropdown.Item >30-40</Dropdown.Item>
-        <Dropdown.Item >40-50</Dropdown.Item>
-        <Dropdown.Item >50-60</Dropdown.Item>
-        <Dropdown.Item >60+</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="10-20">10-20</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="20-30">20-30</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="30-40">30-40</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="40-50">40-50</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="50-60">50-60</Dropdown.Item>
+        <Dropdown.Item name="time" data-value="60+">60+</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-      );
-}
-
-export function RecipeDifficultyDropdown(props) {
-  return (
-    <Dropdown>
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
-    Difficulty
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu>
-    <Dropdown.Item >Piece of Cake</Dropdown.Item>
-    <Dropdown.Item >Some Technique Required</Dropdown.Item>
-    <Dropdown.Item >Master Chef Level</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
   );
 }
 
-// export function RecipeCuisineInput(props) {
-//     return (
-// 
-//     );
-//   }
-
-
-
-export function FormBtn(props) {
+function RecipeDifficultyDropdown(props) {
   return (
-    <button {...props} className="btn btn-success">
-      {props.children}
-    </button>
+    <Dropdown onSelect={props.onSelect}>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Difficulty
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item name="difficulty" data-value="Piece of Cake">Piece of Cake</Dropdown.Item>
+        <Dropdown.Item name="difficulty" data-value="Some Technique Required">Some Technique Required</Dropdown.Item>
+        <Dropdown.Item name="difficulty" data-value="Master Chef Level">Master Chef Level</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }
 
+export default function PostRecipeForm(props) {
 
-export default function PostRecipeForm(props){
-    return (
-    <div>
-        <RecipeNameInput/>
-        <RecipeTimeDropdown/>
-        <RecipeDifficultyDropdown/>
-        <FormBtn/>
-        </div>
-    )
+  return (
+    <Form onSubmit={props.onSubmit}>
+      <RecipeNameInput {...props}/>
+      <RecipeTimeDropdown {...props}/>
+      <RecipeDifficultyDropdown {...props}/>
+      <Button variant="primary" type="submit">Add Recipe</Button>
+      <FileUpload onChange={props.fileSelectHandler} />
+    </Form>
+  );
 }
