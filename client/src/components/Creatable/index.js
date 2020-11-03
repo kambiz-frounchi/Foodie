@@ -38,7 +38,7 @@ export default function Creatable(props) {
           />
         )}
       />
-      <span>Add New Ingredient:</span>
+      <span>Add New {props.label}:</span>
       <br></br>
       <div>
         <TextField
