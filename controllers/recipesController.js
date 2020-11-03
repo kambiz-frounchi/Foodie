@@ -1,5 +1,6 @@
 const db = require("../models");
 const mongoose = require("mongoose");
+const path = require("path");
 
 // Defining methods for the recipesController
 module.exports = {
@@ -43,48 +44,59 @@ module.exports = {
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
-  create: function(req, res) {
-    console.log(req.files);
-    console.log(req.body);
-    res.json("create completed!");
-  }
-  // create: function (req, res) {
-  //   addIngredients(req.body.ingredients).then((ingredients) => {
-  //     addTags(req.body.tags).then((tags) => {
-  //       addCuisine(req.body.cuisine).then((cuisine) => {
+  create: function (req, res) {
+    addIngredients(req.body.ingredients).then((ingredients) => {
+      addTags(req.body.tags).then((tags) => {
+        addCuisine(req.body.cuisine).then((cuisine) => {
+          console.log(req.files);
+          console.log(req.body);
 
-  //         if (req.files && Object.keys(req.files).length) {
-  //           console.log(req.files);
-  //           const recipeImageFile = req.files.myimage;
-  //           const recipeImageSavePath = path.join(__dirname, "../../images/", recipeImageFile.name);
-  //           recipeImageFile.mv(recipeImageSavePath, err => {
-  //             if (err) {
-  //               console.log(err);
-  //             }
-  //           });
-  //         }
+          let imageName = null;
+          if (req.files && Object.keys(req.files).length) {
+            console.log(req.files);
+            const recipeImageFile = req.files.image;
+            imageName = req.files.image.name;
+            const recipeImageSavePath = path.join(
+              __dirname,
+              "../images/",
+              recipeImageFile.name
+            );
 
-  //         db.Recipe.create({
-  //           user: req.body.userId,
-  //           createdDate: req.body.createdDate,
-  //           name: req.body.name,
-  //           description: req.body.description,
-  //           image: recipeImageSavePath,
-  //           time: req.body.time,
-  //           difficulty: req.body.difficulty,
-  //           cuisine: cuisine,
-  //           ingredients: ingredients,
-  //           tags: tags,
-  //         })
-  //           .then((dbModel) => res.json(dbModel))
-  //           .catch((err) => res.status(422).json(err));
-  //       });
-  //     });
-  //   });
-  // },
+            console.log(__dirname);
+            console.log(recipeImageSavePath);
+            recipeImageFile.mv(recipeImageSavePath, (err) => {
+              if (err) {
+                console.log(err);
+              }
+            });
+          }
+
+          db.Recipe.create({
+            //user: req.body.userId,
+            //createdDate: req.body.createdDate,
+            name: req.body.name,
+            //description: req.body.description,
+            image: imageName ? imageName : "none",
+            time: req.body.time,
+            difficulty: req.body.difficulty,
+            //cuisine: cuisine,
+            //ingredients: ingredients,
+            //tags: tags,
+          })
+            .then((dbModel) => res.json(dbModel))
+            .catch((err) => res.status(422).json(err));
+        });
+      });
+    });
+  },
+  getImage: function (req, res) {
+    const imageName = req.params.id;
+    res.sendFile(path.join(__dirname, "../images", imageName));
+  },
 };
 
 const addTags = (tags) => {
+  if (!tags) return Promise.resolve();
   return Promise.all(
     tags.map((tag) => {
       // See if the tag already exists
@@ -102,6 +114,7 @@ const addTags = (tags) => {
 };
 
 const addIngredients = (ingredients) => {
+  if (!ingredients) return Promise.resolve();
   return Promise.all(
     ingredients.map((ingredient) => {
       // See if the ingredient already exists
@@ -119,6 +132,7 @@ const addIngredients = (ingredients) => {
 };
 
 const addCuisine = (cuisine) => {
+  if (!cuisine) return Promise.resolve();
   // See if the cuisine already exists
   return db.Cuisine.findOne(cuisine)
     .exec()

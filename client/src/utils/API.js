@@ -68,6 +68,10 @@ export default {
   getUser: function() {
     return axios.get(`/api/users`);
   },
+  // getImage
+  getImage: function(name) {
+    return axios.get(`/api/recipes/image/${name}`);
+  },
   // upload an image
   uploadImage: function(image) {
     const formData = new FormData();
