@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import TagControl from "../components/TagControl";
-import Creatable from "../components/Creatable"
+import Creatable from "../components/Creatable";
 import FeedRecipe from "../components/FeedRecipe";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 
@@ -11,6 +11,9 @@ function FindRecipe() {
   const [tags, setTags] = useState([]);
   const [formObject, setFormObject] = useState({});
   const [recipes, setRecipes] = useState([]);
+
+  const [input, setInput] = useState([]);
+  const [added, setAdded] = useState([]);
 
   useEffect(() => {
     loadIngredients();
@@ -64,12 +67,33 @@ function FindRecipe() {
       .catch((err) => console.log(err));
   }
 
+  function handleInputChange(event) {
+    setInput(event.target.value);
+  }
+
+  function handleClick(event) {
+    const newIngredient = {_id: Math.round((Math.random() * 1000)), name: input}
+    console.log(newIngredient);
+    setAdded([...added, newIngredient]);
+    setIngredients([...ingredients, newIngredient])
+  }
+
+  function handleAddableChange(value) {
+    setAdded(value);
+  }
+
   return (
     <div>
       <h1>Find Recipes</h1>
       <br />
-      <Creatable items={ingredients}/>
-      <TagControl
+      <Creatable
+        items={ingredients}
+        value={added}
+        onInputChange={handleInputChange}
+        onClick={handleClick}
+        onChange={(event, value) => handleAddableChange(value)}
+      />
+      {/* <TagControl
         items={ingredients}
         label="Ingredients"
         onChange={(event, value) => handleIngredientChange(value)}
@@ -117,9 +141,9 @@ function FindRecipe() {
         ) : (
           <h3> Feed is empty </h3>
         )}
-        <br/>
-        <br/>
-      </Container>
+        <br />
+        <br />
+      </Container> */}
     </div>
   );
 }

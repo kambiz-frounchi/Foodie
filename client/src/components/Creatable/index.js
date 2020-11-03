@@ -29,12 +29,12 @@ export default function Creatable(props) {
         Add
       </Button>
       <Autocomplete
+        getOptionSelected={(option, value) => option.name == value.name}
         multiple
         id="tags-outlined"
         options={props.items}
-        value={props.added}
+        value={props.value}
         getOptionLabel={(option) => option.name}
-        // defaultValue={[top100Films[13]]}
         filterSelectedOptions
         onChange={props.onChange}
         renderInput={(params) => (
