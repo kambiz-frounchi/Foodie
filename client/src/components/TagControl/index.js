@@ -32,7 +32,7 @@ export default function TagControl(props) {
             {...params}
             variant="outlined"
             label={props.label}
-            placeholder="Favorites"
+            placeholder={props.label}
           />
         )}
       />

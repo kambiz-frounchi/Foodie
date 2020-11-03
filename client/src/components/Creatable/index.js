@@ -20,16 +20,8 @@ export default function Creatable(props) {
 
   return (
     <div className={classes.root}>
-      <TextField
-        id="standard-basic"
-        label="Ingredient"
-        onChange={props.onInputChange}
-      />
-      <Button variant="contained" color="primary" onClick={props.onClick}>
-        Add
-      </Button>
       <Autocomplete
-        getOptionSelected={(option, value) => option.name == value.name}
+        // getOptionSelected={(option, value) => option.name == value.name}
         multiple
         id="tags-outlined"
         options={props.items}
@@ -41,11 +33,23 @@ export default function Creatable(props) {
           <TextField
             {...params}
             variant="outlined"
-            label={props.label}
-            placeholder="Favorites"
+            label={`${props.label}s`}
+            placeholder={props.label}
           />
         )}
       />
+      <span>Add New Ingredient:</span>
+      <br></br>
+      <div>
+        <TextField
+          id="standard-basic"
+          label={props.label}
+          onChange={props.onInputChange}
+        />
+        <Button variant="contained" color="primary" onClick={props.onClick}>
+          Add
+        </Button>
+      </div>
     </div>
   );
 }
