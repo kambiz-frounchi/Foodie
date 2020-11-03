@@ -32,15 +32,10 @@ export default function TagControl(props) {
             {...params}
             variant="outlined"
             label={props.label}
-            placeholder="Favorites"
+            placeholder={props.label}
           />
         )}
       />
     </div>
   );
 }
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-// const top100Films = [
-//   { title: 'The Shawshank Redemption', year: 1994 },
-// ];
