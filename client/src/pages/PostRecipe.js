@@ -36,40 +36,25 @@ function PostRecipe() {
     console.log("submitHandler");
     const formData = new FormData();
 
+    console.log(loggedInState);
+
+    formObject.userId = loggedInState.id;
+    formObject.createdDate = new Date();
+
     for (const [key, value] of Object.entries(formObject)) {
       console.log(key);
       console.log(value);
       formData.append(key, value);
     }
 
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
     console.log("uploading ...");
 
-    console.log(loggedInState);
-
-    //if (loggedInState.userId) {
-    //   API.postRecipe({
-    //     userId: loggedInState.userId,
-    //     createdDate: new Date(),
-    //     name: formObject.name,
-    //     image: formObject.image,
-    //     time: formObject.time,
-    //     difficulty: formObject.difficulty,
-    //     cuisine: formObject.cuisine.name,
-    //     ingredients: formObject.ingredients,
-    //     tags: formObject.tags,
-    //   })
     API.postRecipe(formData)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
-    //}
   };
   return (
-    <PostRecipeForm
+    <PostRecipeForm setFormObject={setFormObject} formObject={formObject}
       onSubmit={handleFormSubmit}
       onChange={handleInputChange}
       onSelect={handleSelect}

@@ -22,8 +22,22 @@ function Login() {
       .then((response) => {
         console.log(`login response`);
         console.log(response.data);
-        localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname }));
-        setLoggedInState({ ...loggedInState, loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname });
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            loggedIn: true,
+            id: response.data.user.id,
+            email: response.data.user.email,
+            nickname: response.data.user.nickname,
+          })
+        );
+        setLoggedInState({
+          ...loggedInState,
+          loggedIn: true,
+          id: response.data.user.id,
+          email: response.data.user.email,
+          nickname: response.data.user.nickname,
+        });
         history.push("/");
       })
       .catch((err) => console.log(err));
