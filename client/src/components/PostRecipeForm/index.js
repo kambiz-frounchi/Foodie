@@ -135,10 +135,12 @@ export default function PostRecipeForm(props) {
     };
     setAddedIngredients([...addedIngredients, newIngredient]);
     setIngredients([...ingredients, newIngredient]);
+    props.setFormObject({...props.formObject, ingredients: [...addedIngredients, newIngredient].map((ingredient) => {return ingredient.name})});
   }
 
   function handleAddableIngredientChange(value) {
     setAddedIngredients(value);
+    props.setFormObject({...props.formObject, ingredients: value.map((ingredient) => {return ingredient.name})});
   }
 
   function handleCuisineInputChange(event) {
@@ -152,10 +154,12 @@ export default function PostRecipeForm(props) {
     };
     setAddedCuisines([...addedCuisines, newCuisine]);
     setCuisines([...cuisines, newCuisine]);
+    props.setFormObject({...props.formObject, cuisines: [...addedCuisines, newCuisine].map((cuisine) => {return cuisine.name})});
   }
 
   function handleAddableCuisineChange(value) {
     setAddedCuisines(value);
+    props.setFormObject({...props.formObject, cuisines: value.map((cuisine) => {return cuisine.name})});
   }
 
   function handleTagInputChange(event) {
@@ -166,10 +170,13 @@ export default function PostRecipeForm(props) {
     const newTag = { _id: Math.round(Math.random() * 1000), name: tagInput };
     setAddedTags([...addedTags, newTag]);
     setTags([...tags, newTag]);
+
+    props.setFormObject({...props.formObject, tags: [...addedTags, newTag].map((tag) => {return tag.name})});
   }
 
   function handleAddableTagChange(value) {
     setAddedTags(value);
+    props.setFormObject({...props.formObject, tags: value.map((tag) => {return tag.name})});
   }
 
   return (

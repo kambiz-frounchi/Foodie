@@ -32,10 +32,12 @@ const recipeSchema = new Schema({
   likes: {
     type: Number
   },
-  cuisine: {
-    type: Schema.Types.ObjectId,
-    ref: "Cuisine"
-  },
+  cuisines: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Cuisine"
+    }
+  ],
   ingredients: [
     {
       type: Schema.Types.ObjectId,

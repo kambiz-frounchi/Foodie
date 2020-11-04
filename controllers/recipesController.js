@@ -45,11 +45,15 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req.body);
     addIngredients(req.body.ingredients).then((ingredients) => {
       addTags(req.body.tags).then((tags) => {
-        addCuisine(req.body.cuisine).then((cuisine) => {
+        addCuisine(req.body.cuisines).then((cuisines) => {
           console.log(req.files);
           console.log(req.body);
+          console.log("ingredients", ingredients);
+          console.log("tags", tags);
+          console.log("cuisines", cuisines);
 
           let imageName = null;
           if (req.files && Object.keys(req.files).length) {
@@ -72,16 +76,16 @@ module.exports = {
           }
 
           db.Recipe.create({
-            //user: req.body.userId,
-            //createdDate: req.body.createdDate,
+            user: req.body.userId,
+            createdDate: req.body.createdDate,
             name: req.body.name,
             //description: req.body.description,
             image: imageName ? imageName : "none",
             time: req.body.time,
             difficulty: req.body.difficulty,
-            //cuisine: cuisine,
-            //ingredients: ingredients,
-            //tags: tags,
+            cuisines: cuisines,
+            ingredients: ingredients,
+            tags: tags,
           })
             .then((dbModel) => res.json(dbModel))
             .catch((err) => res.status(422).json(err));
@@ -97,17 +101,19 @@ module.exports = {
 
 const addTags = (tags) => {
   if (!tags) return Promise.resolve();
+  const tagsArray = tags.split(',');
+  console.log(tagsArray);
   return Promise.all(
-    tags.map((tag) => {
+    tagsArray.map((tag) => {
       // See if the tag already exists
-      return db.Tag.findOne(tag)
+      return db.Tag.findOne({name: tag})
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no tag exists, create one
-          return db.Tag(tag).save(); // Returns a promise
+          return db.Tag({name: tag}).save(); // Returns a promise
         });
     })
   );
@@ -115,32 +121,40 @@ const addTags = (tags) => {
 
 const addIngredients = (ingredients) => {
   if (!ingredients) return Promise.resolve();
+  const ingredientsArray = ingredients.split(',');
+  console.log(ingredientsArray);
   return Promise.all(
-    ingredients.map((ingredient) => {
+    ingredientsArray.map((ingredient) => {
       // See if the ingredient already exists
-      return db.Ingredient.findOne(ingredient)
+      return db.Ingredient.findOne({name: ingredient})
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no ingredient exists, create one
-          return db.Ingredient(ingredient).save(); // Returns a promise
+          return db.Ingredient({name: ingredient}).save(); // Returns a promise
         });
     })
   );
 };
 
-const addCuisine = (cuisine) => {
-  if (!cuisine) return Promise.resolve();
-  // See if the cuisine already exists
-  return db.Cuisine.findOne(cuisine)
-    .exec()
-    .then((doc) => {
-      if (doc) {
-        return doc;
-      }
-      // If no cuisine exists, create one
-      return db.Cuisine(cuisine).save(); // Returns a promise
-    });
+const addCuisine = (cuisines) => {
+  if (!cuisines) return Promise.resolve();
+  const cuisinesArray = cuisines.split(',');
+  console.log(cuisinesArray);
+  return Promise.all(
+    cuisinesArray.map((cuisine) => {
+      // See if the cuisine already exists
+      return db.Ingredient.findOne({name: cuisine})
+        .exec()
+        .then((doc) => {
+          if (doc) {
+            return doc;
+          }
+          // If no cuisine exists, create one
+          return db.Ingredient({name: cuisine}).save(); // Returns a promise
+        });
+    })
+  );
 };
