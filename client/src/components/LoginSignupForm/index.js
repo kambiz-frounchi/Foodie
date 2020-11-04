@@ -1,8 +1,6 @@
 import React from "react";
 
-// This file exports the Input, TextArea, and FormBtn components
-
-export function Input(props) {
+function Input(props) {
   return (
     <div className="form-group">
       <label htmlFor="exampleInputPassword1">{props.name}</label>
@@ -11,8 +9,7 @@ export function Input(props) {
   );
 }
 
-export function PasswordInput(props) {
-  console.log("Password");
+function PasswordInput(props) {
   return (
     <div className="form-group">
       <label htmlFor="exampleInputPassword1">Password</label>
@@ -28,7 +25,7 @@ export function PasswordInput(props) {
   );
 }
 
-export function UserEmailInput(props) {
+function UserEmailInput(props) {
   console.log("UserEmail");
   return (
     <div className="form-group">
@@ -45,7 +42,7 @@ export function UserEmailInput(props) {
   );
 }
 
-export function FormBtn(props) {
+function FormBtn(props) {
   return (
     <button {...props} className="btn btn-success">
       {props.children}
@@ -53,7 +50,7 @@ export function FormBtn(props) {
   );
 }
 
-export function CommonFormComponents(props) {
+function CommonFormComponents(props) {
   return (
     <div>
       <UserEmailInput {...props} />
@@ -62,7 +59,7 @@ export function CommonFormComponents(props) {
   );
 }
 
-export function SignupForm(props) {
+function SignupForm(props) {
   return (
     <form className="signup">
       <Input
@@ -76,10 +73,10 @@ export function SignupForm(props) {
   );
 }
 
-export function LoginForm(props) {
+function LoginForm(props) {
   return (
     <form className="login">
-      <CommonFormComponents onChange={props.onChange}/>
+      <CommonFormComponents onChange={props.onChange} />
       <FormBtn onClick={props.onClick}>login</FormBtn>
       <FormBtn onClick={props.onCreateNewUserClick}>Create New User</FormBtn>
     </form>
