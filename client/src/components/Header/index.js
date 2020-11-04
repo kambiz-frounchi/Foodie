@@ -41,7 +41,7 @@ function Header(props) {
       </Navbar.Brand>
 
       <Nav className="mr-auto">
-        <Nav.Link href="#">{loggedInState.email}</Nav.Link>
+        <Nav.Link href="#">{loggedInState.nickname}</Nav.Link>
         <Nav.Link href="#" onClick={handleLoginLogout}>
           {loggedInState.loggedIn ? "logout" : "login"}
         </Nav.Link>

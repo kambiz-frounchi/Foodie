@@ -16,8 +16,8 @@ function Wrapper(props) {
             console.log("user");
             console.log(response.data);
             if (response.data.user.id) {
-              setLoggedInState({ loggedIn: true, email: response.data.user.email });
-              localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email }));
+              setLoggedInState({ loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname });
+              localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname }));
               history.push("/");
             }
             else {

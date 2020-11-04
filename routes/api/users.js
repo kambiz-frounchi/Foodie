@@ -35,7 +35,7 @@ router.route("/login").post(
     let userInfo = {
       email: req.user.email,
       id: req.user.id,
-      //nickname: user.nickname
+      nickname: req.user.nickname
     };
     res.send({user: userInfo});
   }

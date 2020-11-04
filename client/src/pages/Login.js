@@ -17,13 +17,13 @@ function Login() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(formObject);
+    //console.log(formObject);
     API.login(formObject)
       .then((response) => {
         console.log(`login response`);
         console.log(response.data);
-        localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email }));
-        setLoggedInState({ ...loggedInState, loggedIn: true, email: response.data.user.email });
+        localStorage.setItem("userInfo", JSON.stringify({ loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname }));
+        setLoggedInState({ ...loggedInState, loggedIn: true, email: response.data.user.email, nickname: response.data.user.nickname });
         history.push("/");
       })
       .catch((err) => console.log(err));
