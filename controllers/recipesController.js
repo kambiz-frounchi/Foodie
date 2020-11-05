@@ -44,6 +44,14 @@ module.exports = {
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
+
+  getRecipe: function (req, res) {
+    console.log(req.params)
+    db.Recipe.find({_id : req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+
   create: function (req, res) {
     console.log(req.body);
     addIngredients(req.body.ingredients).then((ingredients) => {
