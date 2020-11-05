@@ -146,14 +146,14 @@ const addCuisine = (cuisines) => {
   return Promise.all(
     cuisinesArray.map((cuisine) => {
       // See if the cuisine already exists
-      return db.Ingredient.findOne({name: cuisine})
+      return db.Cuisine.findOne({name: cuisine})
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no cuisine exists, create one
-          return db.Ingredient({name: cuisine}).save(); // Returns a promise
+          return db.Cuisine({name: cuisine}).save(); // Returns a promise
         });
     })
   );
