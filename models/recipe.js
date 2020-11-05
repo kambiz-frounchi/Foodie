@@ -30,7 +30,8 @@ const recipeSchema = new Schema({
     enum: ["Piece of Cake", "Some Technique Required", "Master Chef Level"]
   },
   likes: {
-    type: Number
+    type: Number,
+    default: 0
   },
   cuisines: [
     {

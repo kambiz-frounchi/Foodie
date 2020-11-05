@@ -2,7 +2,6 @@ const router = require("express").Router();
 const recipesController = require("../../controllers/recipesController");
 const isAuthenticated = require("../../passport/isAuthenticated");
 const path = require("path");
-const fs = require("fs");
 
 router.route("/find").post(recipesController.find);
 
@@ -30,16 +29,8 @@ router.route("/upload").post((req, res) => {
 
 router.route("/images/:id").get(recipesController.getImage);
 
-// Matches with "/api/recipes"
-//router.route("/")
-//.get(recipesController.findAll)
-//.post(recipesController.create);
+router.route("/like/:id").post(recipesController.updateLikeCount);
 
-// Matches with "/api/recipes/:id"
-//router
-//  .route("/:id")
-//.get(recipesController.findById)
-//.put(recipesController.update)
-//.delete(recipesController.remove);
+router.route("/:id").get(recipesController.getRecipe);
 
 module.exports = router;

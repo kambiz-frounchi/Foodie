@@ -88,5 +88,9 @@ export default {
     }
     console.log("uploading ...");
     return axios.post(`/api/recipes/upload`, formData, config);
+  },
+  //get user recipe state
+  getUserRecipeState: function (userId) {
+    return axios.get(`/api/userrecipestates/${userId}`);
   }
 };

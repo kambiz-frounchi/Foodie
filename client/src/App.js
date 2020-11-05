@@ -56,8 +56,11 @@ function App() {
               <Route exact path={["/login"]}>
                 <Login />
               </Route>
-              <Route>
-                <FileUploadTest exact path={"/upload"}/>
+              <Route exact path={["/public/images"]}>
+                <Login />
+              </Route> 
+              <Route exact path={"/upload"}>
+                <FileUploadTest/>
               </Route>
             </Switch>
           </Wrapper>
