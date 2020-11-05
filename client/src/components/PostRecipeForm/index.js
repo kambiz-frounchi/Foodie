@@ -180,7 +180,7 @@ export default function PostRecipeForm(props) {
   }
 
   return (
-    <div style={{ padding: "50px" }}>
+    <div style={{ padding: "20px" }}>
       <Form onSubmit={props.onSubmit}>
         <Form.Group as={Row} controlId="formHorizontalName">
           <Form.Label column sm={2}>

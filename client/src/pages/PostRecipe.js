@@ -54,12 +54,15 @@ function PostRecipe() {
       .catch((err) => console.log(err));
   };
   return (
+    <div>
+    <h1 style={{padding: '20px'}}>Post a Recipe</h1>
     <PostRecipeForm setFormObject={setFormObject} formObject={formObject}
       onSubmit={handleFormSubmit}
       onChange={handleInputChange}
       onSelect={handleSelect}
       fileSelectHandler={handleFileSelect}
     />
+    </div>
   );
 }
 

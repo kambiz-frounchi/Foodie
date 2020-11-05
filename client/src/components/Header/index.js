@@ -30,7 +30,7 @@ function Header(props) {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">
+      <Navbar.Brand href="/">
         <img
           src={require("./assets/foodie2.png")}
           width="75"
@@ -42,6 +42,8 @@ function Header(props) {
 
       <Nav className="mr-auto">
         <Nav.Link href="#">{loggedInState.nickname}</Nav.Link>
+        <Nav.Link href="/find">Recipe Matcher™</Nav.Link>
+        <Nav.Link href="/post">Post a Recipe</Nav.Link>
         <Nav.Link href="#" onClick={handleLoginLogout}>
           {loggedInState.loggedIn ? "logout" : "login"}
         </Nav.Link>

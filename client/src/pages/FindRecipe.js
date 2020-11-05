@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import TagControl from "../components/TagControl";
-import Creatable from "../components/Creatable"
+import Creatable from "../components/Creatable";
 import FeedRecipe from "../components/FeedRecipe";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, ListGroup, Button, Form } from "react-bootstrap";
 
 function FindRecipe() {
   const [ingredients, setIngredients] = useState([]);
@@ -65,35 +65,53 @@ function FindRecipe() {
   }
 
   return (
-    <div>
-      <h1>Find Recipes</h1>
-      <br />
-      <Creatable items={ingredients}/>
-      <TagControl
-        items={ingredients}
-        label="Ingredient"
-        onChange={(event, value) => handleIngredientChange(value)}
-      />
-      <br />
-      <TagControl
-        items={cuisines}
-        label="Cuisine"
-        onChange={(event, value) => handleCuisineChange(value)}
-      />
-      <br />
-      <TagControl
-        items={tags}
-        label="Tag"
-        onChange={(event, value) => handleTagChange(value)}
-      />
-      <br />
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={handleFormSubmit}
-      >
-        Search
-      </button>
+    <div style={{ padding: "20px" }}>
+      <h1>Recipe Matcher™</h1>
+      <Form onSubmit={handleFormSubmit}>
+        <Form.Group as={Row} controlId="formHorizontalIngredients">
+          <Form.Label column sm={2}>
+            Ingredients
+          </Form.Label>
+          <Col sm={2}>
+            <TagControl
+              items={ingredients}
+              label="Ingredient"
+              onChange={(event, value) => handleIngredientChange(value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formHorizontalCuisines">
+          <Form.Label column sm={2}>
+            Cuisines
+          </Form.Label>
+          <Col sm={2}>
+            <TagControl
+              items={cuisines}
+              label="Cuisine"
+              onChange={(event, value) => handleCuisineChange(value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formHorizontalTags">
+          <Form.Label column sm={2}>
+            Tags
+          </Form.Label>
+          <Col sm={2}>
+            <TagControl
+              items={tags}
+              label="Tag"
+              onChange={(event, value) => handleTagChange(value)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row}>
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Button variant="primary" type="submit" onClick={handleFormSubmit}>
+              Find Recipes
+            </Button>
+          </Col>
+        </Form.Group>
+      </Form>
       <Container>
         {recipes.length ? (
           <ListGroup>
