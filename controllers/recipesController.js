@@ -19,7 +19,7 @@ module.exports = {
       const cuisines = req.body.cuisines.map((cuisine) =>
         mongoose.Types.ObjectId(cuisine._id)
       );
-      query.cuisine = { $in: cuisines };
+      query.cuisines = { $in: cuisines };
     }
     if (req.body.tags && req.body.tags.length > 0) {
       const tags = req.body.tags.map((tag) => mongoose.Types.ObjectId(tag._id));
@@ -29,6 +29,22 @@ module.exports = {
     console.log("Query:\n", query);
 
     db.Recipe.find(query)
+      .populate("user")
+      .sort({ createdDate: -1 })
+      .then((dbModels) => {
+        console.log(dbModels);
+        res.json(dbModels);
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+  textSearch: function (req, res) {
+    console.log(req.body);
+    db.Recipe.find({
+      $or: [
+        { name: { $regex: req.body.search, $options: "i" } },
+        { description: { $regex: req.body.search, $options: "i" } },
+      ],
+    })
       .populate("user")
       .sort({ createdDate: -1 })
       .then((dbModels) => {
