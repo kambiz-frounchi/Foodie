@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../utils/userContext";
@@ -41,7 +41,7 @@ function Header(props) {
       </Navbar.Brand>
 
       <Nav className="mr-auto">
-        <Nav.Link href="#">{loggedInState.nickname}</Nav.Link>
+        <Nav.Link href="/user">{loggedInState.nickname}</Nav.Link>
         <Nav.Link href="/find">Recipe Matcher™</Nav.Link>
         <Nav.Link href="/post">Post a Recipe</Nav.Link>
         <Nav.Link href="#" onClick={handleLoginLogout}>

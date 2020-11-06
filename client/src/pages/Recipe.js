@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import API from "../utils/API";
-import UserContext from "../utils/userContext";
 import RecipeContent from "../components/Recipe";
 import { useLocation } from "react-router-dom";
 

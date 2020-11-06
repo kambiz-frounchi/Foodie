@@ -45,6 +45,16 @@ module.exports = {
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
+  findByUser: function (req, res) {
+    console.log("findByUser", req.params.id);
+    db.Recipe.find({ user: req.params.id })
+    .populate("user")
+    .populate("ingredients")
+    .populate("cuisines")
+    .populate("tags")
+      .then((dbModels) => res.json(dbModels))
+      .catch((err) => res.status(422).json(err));
+  },
   getRecipe: function (req, res) {
     db.Recipe.findOne({ _id: req.params.id })
       .populate("user")

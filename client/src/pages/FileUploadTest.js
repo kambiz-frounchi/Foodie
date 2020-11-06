@@ -50,12 +50,7 @@ function FileUploadTest(props) {
         console.log(value);
         formData.append(key, value);
     }
-
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
+  
     console.log("uploading ...");
     //return axios.post(`/api/recipes/upload`, formData, config);
 

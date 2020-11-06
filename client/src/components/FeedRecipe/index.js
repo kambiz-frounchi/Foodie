@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import API from "../../utils/API";
 
@@ -49,8 +49,8 @@ function FeedRecipe(props) {
           <Card.Subtitle className="mb-2 text-muted">
             by {props.nickname}
           </Card.Subtitle>
-          <Card.Text>{props.description.substring(0,100)}...</Card.Text>
-          <Button variant="primary" onClick={handleLikeButtonClick}>
+          <Card.Text>{props.description ? props.description.substring(0,100) : ""}...</Card.Text>
+          <Button variant="primary" disabled={props.likeDisabled ? true : false} onClick={handleLikeButtonClick}>
             {liked()}
           </Button>
         </Card.Body>

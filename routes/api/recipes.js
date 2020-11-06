@@ -9,6 +9,12 @@ router.route("/").get(recipesController.findAll).post(recipesController.create);
 
 router.route("/:id").get(recipesController.getRecipe);
 
+router.route("/images/:id").get(recipesController.getImage);
+
+router.route("/like/:id").post(recipesController.updateLikeCount);
+
+router.route("/user/:id").get(recipesController.findByUser);
+
 router.route("/upload").post((req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send("No files were uploaded.");
@@ -26,11 +32,5 @@ router.route("/upload").post((req, res) => {
   );
   res.status(200).send("file received");
 });
-
-router.route("/images/:id").get(recipesController.getImage);
-
-router.route("/like/:id").post(recipesController.updateLikeCount);
-
-router.route("/:id").get(recipesController.getRecipe);
 
 module.exports = router;
