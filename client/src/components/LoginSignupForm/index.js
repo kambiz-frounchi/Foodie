@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 function Input(props) {
   return (
@@ -61,25 +62,49 @@ function CommonFormComponents(props) {
 
 function SignupForm(props) {
   return (
-    <form className="signup">
-      <Input
-        onChange={props.onChange}
-        name="nickname"
-        placeholder="nickname (required)"
-      />
-      <CommonFormComponents onChange={props.onChange} />
-      <FormBtn onClick={props.onClick}>signup</FormBtn>
-    </form>
+    <Container>
+      <Row>
+        <Col xs={5}>
+          <img src={require("./assets/foodie.png")} alt="Logo"></img>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={5}>
+          <form className="signup">
+            <Input
+              onChange={props.onChange}
+              name="nickname"
+              placeholder="nickname (required)"
+            />
+            <CommonFormComponents onChange={props.onChange} />
+            <FormBtn onClick={props.onClick}>signup</FormBtn>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
 function LoginForm(props) {
   return (
-    <form className="login">
-      <CommonFormComponents onChange={props.onChange} />
-      <FormBtn onClick={props.onClick}>login</FormBtn>
-      <FormBtn onClick={props.onCreateNewUserClick}>Create New User</FormBtn>
-    </form>
+    <Container>
+      <Row>
+        <Col xs={5}>
+          <img src={require("./assets/foodie.png")} alt="Logo"></img>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={5}>
+          <form className="login">
+            <CommonFormComponents onChange={props.onChange} />
+            <FormBtn onClick={props.onClick}>login</FormBtn>
+            <FormBtn onClick={props.onCreateNewUserClick}>
+              Create New User
+            </FormBtn>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
