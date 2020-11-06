@@ -121,6 +121,7 @@ function FindRecipe() {
                   <Col md={4}></Col>
                   <Col md={4}>
                     <FeedRecipe
+                      id={recipe._id}
                       name={recipe.name}
                       nickname={recipe.user.nickname}
                       img={recipe.image}

@@ -54,12 +54,13 @@ function Feed(props) {
                 <Col md={4}></Col>
                 <Col md={4}>
                   <FeedRecipe
+                    id={recipe._id}
                     name={recipe.name}
-                    nickname={loggedInState.nickname}
+                    nickname={recipe.user.nickname}
                     img={recipe.image}
                     description={recipe.description}
                     recipeId={recipe._id}
-                    userId={loggedInState.id}
+                    userId={recipe.user._id}
                     likeState={recipe.likeState}
                     likeCounter={recipe.likes}
                   />

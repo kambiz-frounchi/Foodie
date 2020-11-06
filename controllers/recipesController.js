@@ -40,13 +40,17 @@ module.exports = {
   findAll: function (req, res) {
     console.log(req.body);
     db.Recipe.find({})
+      .populate("user")
       .sort({ createdDate: -1 })
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
   getRecipe: function (req, res) {
-    console.log(req.params);
     db.Recipe.findOne({ _id: req.params.id })
+      .populate("user")
+      .populate("ingredients")
+      .populate("cuisines")
+      .populate("tags")
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -171,14 +175,14 @@ const addCuisine = (cuisines) => {
   return Promise.all(
     cuisinesArray.map((cuisine) => {
       // See if the cuisine already exists
-      return db.Cuisine.findOne({name: cuisine})
+      return db.Cuisine.findOne({ name: cuisine })
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no cuisine exists, create one
-          return db.Cuisine({name: cuisine}).save(); // Returns a promise
+          return db.Cuisine({ name: cuisine }).save(); // Returns a promise
         });
     })
   );

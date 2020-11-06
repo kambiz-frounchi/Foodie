@@ -45,9 +45,9 @@ function FeedRecipe(props) {
           alt="recipe image"
         />
         <Card.Body>
-          <Card.Title>{props.name}</Card.Title>
+          <a href={`/recipe/${props.id}`}><Card.Title>{props.name}</Card.Title></a>
           <Card.Subtitle className="mb-2 text-muted">
-            {props.nickname}
+            by {props.nickname}
           </Card.Subtitle>
           <Card.Text>{props.description}</Card.Text>
           <Button variant="primary" onClick={handleLikeButtonClick}>
