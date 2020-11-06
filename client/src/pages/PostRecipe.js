@@ -1,15 +1,16 @@
 import React, { useState, useContext } from "react";
 import API from "../utils/API";
 import UserContext from "../utils/userContext";
+import {useHistory} from "react-router-dom";
 import PostRecipeForm from "../components/PostRecipeForm";
 
 function PostRecipe() {
   const { loggedInState } = useContext(UserContext);
   const [formObject, setFormObject] = useState({});
+  const history = useHistory();
 
-  const handleSelect = (eventKey, event) => {
-    const { name } = event.target;
-    const value = event.target.dataset.value;
+  const handleSelect = (name, event) => {
+    const value = event.target.value;
     console.log("handleSelect");
     console.log(name);
     console.log(value);
@@ -47,10 +48,15 @@ function PostRecipe() {
       formData.append(key, value);
     }
 
+    console.log(formObject);
+
     console.log("uploading ...");
 
     API.postRecipe(formData)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        history.push("/");
+      })
       .catch((err) => console.log(err));
   };
   return (

@@ -89,7 +89,7 @@ module.exports = {
             user: req.body.userId,
             createdDate: req.body.createdDate,
             name: req.body.name,
-            //description: req.body.description,
+            description: req.body.description,
             image: imageName ? imageName : "none",
             time: req.body.time,
             difficulty: req.body.difficulty,

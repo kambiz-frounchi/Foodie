@@ -21,7 +21,7 @@ export default function RecipeContent(props) {
         src={`/api/recipes/images/${props.img}`}
         alt={props.name}
       ></img>
-      <p>{props.description}</p>
+      <br/><br/>
       <Badge pill variant="secondary">
         Time: {props.time} mins
       </Badge>
@@ -56,6 +56,8 @@ export default function RecipeContent(props) {
           <ListGroup.Item key={tag._id}>{tag.name}</ListGroup.Item>
         ))}
       </ListGroup>
+      <br/>
+      <p>{props.description}</p>
     </div>
   );
 }
