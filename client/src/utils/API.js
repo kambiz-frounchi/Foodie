@@ -44,6 +44,9 @@ export default {
   findRecipes: function(searchData) {
     return axios.post(`/api/recipes/find`, searchData);
   },
+  textSearchRecipes: function(searchData) {
+    return axios.post(`/api/recipes/search`, searchData);
+  },
   // Likes a specific recipe
   likeRecipe: function(id, likeData) {
     return axios.post(`/api/recipes/like/${id}`, likeData);

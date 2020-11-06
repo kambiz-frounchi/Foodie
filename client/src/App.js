@@ -10,6 +10,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Feed from "./pages/Feed";
 import FindRecipe from "./pages/FindRecipe";
+import SearchRecipe from "./pages/SearchRecipe";
 import PostRecipe from "./pages/PostRecipe";
 import Recipe from "./pages/Recipe";
 import UserProfile from "./pages/UserProfile";
@@ -18,7 +19,6 @@ import Login from "./pages/Login";
 import FileUploadTest from "./pages/FileUploadTest";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
-import API from "./utils/API";
 import UserContext from "./utils/userContext";
 
 function App() {
@@ -46,6 +46,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute exact path={["/find"]}>
                 <FindRecipe />
+              </PrivateRoute>
+              <PrivateRoute exact path={["/search/:search"]}>
+                <SearchRecipe />
               </PrivateRoute>
               <PrivateRoute exact path={["/post"]}>
                 <PostRecipe />
