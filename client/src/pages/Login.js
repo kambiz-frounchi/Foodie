@@ -21,7 +21,7 @@ function Login() {
     API.login(formObject)
       .then((response) => {
         console.log(`login response`);
-        console.log(response.data);
+        //console.log(response.data);
         localStorage.setItem(
           "userInfo",
           JSON.stringify({

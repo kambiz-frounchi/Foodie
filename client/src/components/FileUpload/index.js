@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 //import { Form } from "react-bootstrap";
 import ImageUploader from "react-images-upload";
 //import API from "../../utils/API";
@@ -8,10 +8,10 @@ function FileUpload(props) {
   return (
     <ImageUploader
       withIcon={true}
-      label="Max file size: 10MB, accepted: jpg | gif | png"
+      label="Max file size: 10MB, accepted: jpg | jpeg | gif | png"
       buttonText="Choose images"
       onChange={props.onChange}
-      imgExtension={[".jpg", ".gif", ".png"]}
+      imgExtension={[".jpg", ".jpeg", ".gif", ".png"]}
       maxFileSize={10485760}
       singleImage={true}
     />

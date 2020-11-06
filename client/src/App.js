@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
-  useHistory,
+  Redirect
 } from "react-router-dom";
-import logo from "./logo.svg";
+
 import "./App.css";
 import Feed from "./pages/Feed";
 import FindRecipe from "./pages/FindRecipe";
@@ -18,7 +17,6 @@ import Login from "./pages/Login";
 import FileUploadTest from "./pages/FileUploadTest";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
-import API from "./utils/API";
 import UserContext from "./utils/userContext";
 
 function App() {

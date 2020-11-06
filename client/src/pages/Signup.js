@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginSignupForm } from "../components/LoginSignupForm";
 import API from "../utils/API";
@@ -14,7 +14,7 @@ function Signup () {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log(formObject);
+        //console.log(formObject);
         API.signup(formObject)
         .then(() => history.push("/login"))
         .catch(err => console.log(err));

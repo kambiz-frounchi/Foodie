@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown } from "react-bootstrap";
 import FileUpload from "../FileUpload";
 import Creatable from "../Creatable";
 import API from "../../utils/API";
@@ -15,22 +14,22 @@ import {
   Col,
 } from "react-bootstrap";
 
-function Input(props) {
-  return (
-    <InputGroup className="mb-3">
-      <InputGroup.Prepend>
-        <InputGroup.Text id="basic-addon1">name</InputGroup.Text>
-      </InputGroup.Prepend>
-      <FormControl
-        placeholder={props.name}
-        aria-label={props.name}
-        aria-describedby="basic-addon1"
-        onChange={props.onChange}
-        name={props.name}
-      />
-    </InputGroup>
-  );
-}
+// function Input(props) {
+//   return (
+//     <InputGroup className="mb-3">
+//       <InputGroup.Prepend>
+//         <InputGroup.Text id="basic-addon1">name</InputGroup.Text>
+//       </InputGroup.Prepend>
+//       <FormControl
+//         placeholder={props.name}
+//         aria-label={props.name}
+//         aria-describedby="basic-addon1"
+//         onChange={props.onChange}
+//         name={props.name}
+//       />
+//     </InputGroup>
+//   );
+// }
 
 function RecipeNameInput(props) {
   return <Form.Control as="input" onChange={props.onChange} name="name"></Form.Control>;
