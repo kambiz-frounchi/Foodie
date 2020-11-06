@@ -48,7 +48,7 @@ function SearchRecipe() {
             ))}
           </ListGroup>
         ) : (
-          <h3> Feed is empty </h3>
+          <h3> No results </h3>
         )}
         <br />
         <br />
