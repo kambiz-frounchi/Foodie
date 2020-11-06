@@ -31,6 +31,7 @@ function Feed(props) {
               for (let j = 0; j < userRecipeStates.length; j++) {
                 if (recipesArray[i]._id === userRecipeStates[j].recipeId) {
                   recipesArray[i].likeState = userRecipeStates[j].likeStatus;
+                  recipesArray[i].nickname = recipesArray[i].user.nickname;
                   console.log(recipesArray[i]);
                 }
               }
@@ -56,11 +57,11 @@ function Feed(props) {
                   <FeedRecipe
                     id={recipe._id}
                     name={recipe.name}
-                    nickname={recipe.user.nickname}
+                    nickname={recipe.nickname}
                     img={recipe.image}
                     description={recipe.description}
                     recipeId={recipe._id}
-                    userId={recipe.user._id}
+                    userId={loggedInState.id}
                     likeState={recipe.likeState}
                     likeCounter={recipe.likes}
                   />
