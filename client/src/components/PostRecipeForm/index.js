@@ -3,6 +3,9 @@ import { Dropdown } from "react-bootstrap";
 import FileUpload from "../FileUpload";
 import Creatable from "../Creatable";
 import API from "../../utils/API";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+
 import {
   Form,
   InputGroup,
@@ -30,59 +33,92 @@ function Input(props) {
 }
 
 function RecipeNameInput(props) {
-  return <Input {...props} name="name"></Input>;
+  return <Form.Control as="input" onChange={props.onChange} name="name"></Form.Control>;
+}
+
+function RecipeDescriptionInput(props) {
+  return (
+    <Form.Control
+      name="description"
+      as="textarea"
+      onChange={props.onChange}
+      rows={5}
+      style={{ width: "500px" }}
+    />
+  );
 }
 
 function RecipeTimeDropdown(props) {
   return (
-    <Dropdown onSelect={props.onSelect}>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Time
-      </Dropdown.Toggle>
+    <>
+      <Select id="timeSelect" onChange={props.onSelect.bind(null, "time")}>
+        <MenuItem value="10-20">10-20</MenuItem>
+        <MenuItem value="20-30">20-30</MenuItem>
+        <MenuItem value="30-40">30-40</MenuItem>
+        <MenuItem value="40-50">40-50</MenuItem>
+        <MenuItem value="50-60">50-60</MenuItem>
+        <MenuItem value="60+">60+</MenuItem>
+      </Select>
+      {/* <Dropdown onSelect={props.onSelect}>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Time
+        </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item name="time" data-value="10-20">
-          10-20
-        </Dropdown.Item>
-        <Dropdown.Item name="time" data-value="20-30">
-          20-30
-        </Dropdown.Item>
-        <Dropdown.Item name="time" data-value="30-40">
-          30-40
-        </Dropdown.Item>
-        <Dropdown.Item name="time" data-value="40-50">
-          40-50
-        </Dropdown.Item>
-        <Dropdown.Item name="time" data-value="50-60">
-          50-60
-        </Dropdown.Item>
-        <Dropdown.Item name="time" data-value="60+">
-          60+
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+        <Dropdown.Menu>
+          <Dropdown.Item name="time" data-value="10-20">
+            10-20
+          </Dropdown.Item>
+          <Dropdown.Item name="time" data-value="20-30">
+            20-30
+          </Dropdown.Item>
+          <Dropdown.Item name="time" data-value="30-40">
+            30-40
+          </Dropdown.Item>
+          <Dropdown.Item name="time" data-value="40-50">
+            40-50
+          </Dropdown.Item>
+          <Dropdown.Item name="time" data-value="50-60">
+            50-60
+          </Dropdown.Item>
+          <Dropdown.Item name="time" data-value="60+">
+            60+
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown> */}
+    </>
   );
 }
 
 function RecipeDifficultyDropdown(props) {
   return (
-    <Dropdown onSelect={props.onSelect}>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Difficulty
-      </Dropdown.Toggle>
+    <Select
+      id="difficultySelect"
+      onChange={props.onSelect.bind(null, "difficulty")}
+    >
+      <MenuItem value="Piece of Cake">Piece of Cake</MenuItem>
 
-      <Dropdown.Menu>
-        <Dropdown.Item name="difficulty" data-value="Piece of Cake">
-          Piece of Cake
-        </Dropdown.Item>
-        <Dropdown.Item name="difficulty" data-value="Some Technique Required">
-          Some Technique Required
-        </Dropdown.Item>
-        <Dropdown.Item name="difficulty" data-value="Master Chef Level">
-          Master Chef Level
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+      <MenuItem value="Some Technique Required">
+        Some Technique Required
+      </MenuItem>
+      <MenuItem value="Master Chef Level">Master Chef Level</MenuItem>
+    </Select>
+    // <Dropdown onSelect={props.onSelect}>
+    //   <Dropdown.Toggle variant="success" id="dropdown-basic">
+    //     Difficulty
+    //   </Dropdown.Toggle>
+
+    //   <Dropdown.Menu>
+    //     <Dropdown.Item name="difficulty" data-value="Piece of Cake">
+    //       Piece of Cake
+    //     </Dropdown.Item>
+    //     <Dropdown.Item name="difficulty" data-value="Some Technique Required">
+    //       Some Technique Required
+    //     </Dropdown.Item>
+    //     <Dropdown.Item name="difficulty" data-value="Master Chef Level">
+    //       Master Chef Level
+    //     </Dropdown.Item>
+    //   </Dropdown.Menu>
+    // </Dropdown>
   );
 }
 
@@ -135,12 +171,22 @@ export default function PostRecipeForm(props) {
     };
     setAddedIngredients([...addedIngredients, newIngredient]);
     setIngredients([...ingredients, newIngredient]);
-    props.setFormObject({...props.formObject, ingredients: [...addedIngredients, newIngredient].map((ingredient) => {return ingredient.name})});
+    props.setFormObject({
+      ...props.formObject,
+      ingredients: [...addedIngredients, newIngredient].map((ingredient) => {
+        return ingredient.name;
+      }),
+    });
   }
 
   function handleAddableIngredientChange(value) {
     setAddedIngredients(value);
-    props.setFormObject({...props.formObject, ingredients: value.map((ingredient) => {return ingredient.name})});
+    props.setFormObject({
+      ...props.formObject,
+      ingredients: value.map((ingredient) => {
+        return ingredient.name;
+      }),
+    });
   }
 
   function handleCuisineInputChange(event) {
@@ -154,12 +200,22 @@ export default function PostRecipeForm(props) {
     };
     setAddedCuisines([...addedCuisines, newCuisine]);
     setCuisines([...cuisines, newCuisine]);
-    props.setFormObject({...props.formObject, cuisines: [...addedCuisines, newCuisine].map((cuisine) => {return cuisine.name})});
+    props.setFormObject({
+      ...props.formObject,
+      cuisines: [...addedCuisines, newCuisine].map((cuisine) => {
+        return cuisine.name;
+      }),
+    });
   }
 
   function handleAddableCuisineChange(value) {
     setAddedCuisines(value);
-    props.setFormObject({...props.formObject, cuisines: value.map((cuisine) => {return cuisine.name})});
+    props.setFormObject({
+      ...props.formObject,
+      cuisines: value.map((cuisine) => {
+        return cuisine.name;
+      }),
+    });
   }
 
   function handleTagInputChange(event) {
@@ -171,12 +227,22 @@ export default function PostRecipeForm(props) {
     setAddedTags([...addedTags, newTag]);
     setTags([...tags, newTag]);
 
-    props.setFormObject({...props.formObject, tags: [...addedTags, newTag].map((tag) => {return tag.name})});
+    props.setFormObject({
+      ...props.formObject,
+      tags: [...addedTags, newTag].map((tag) => {
+        return tag.name;
+      }),
+    });
   }
 
   function handleAddableTagChange(value) {
     setAddedTags(value);
-    props.setFormObject({...props.formObject, tags: value.map((tag) => {return tag.name})});
+    props.setFormObject({
+      ...props.formObject,
+      tags: value.map((tag) => {
+        return tag.name;
+      }),
+    });
   }
 
   return (
@@ -257,6 +323,14 @@ export default function PostRecipeForm(props) {
               onChange={(event, value) => handleAddableTagChange(value)}
               label="Tag"
             />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formDescription">
+          <Form.Label column sm={2}>
+            Description
+          </Form.Label>
+          <Col sm={2}>
+            <RecipeDescriptionInput {...props}/>
           </Col>
         </Form.Group>
         <Form.Group as={Row}>

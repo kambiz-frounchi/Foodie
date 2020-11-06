@@ -49,7 +49,7 @@ function FeedRecipe(props) {
           <Card.Subtitle className="mb-2 text-muted">
             by {props.nickname}
           </Card.Subtitle>
-          <Card.Text>{props.description}</Card.Text>
+          <Card.Text>{props.description.substring(0,100)}...</Card.Text>
           <Button variant="primary" onClick={handleLikeButtonClick}>
             {liked()}
           </Button>
