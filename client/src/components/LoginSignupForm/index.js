@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 function Input(props) {
   return (
@@ -85,5 +86,22 @@ function LoginForm(props) {
 
 export function LoginSignupForm(props) {
   console.log(props.signup);
-  return props.signup ? <SignupForm {...props} /> : <LoginForm {...props} />;
+  return (
+    <Container>
+      <Row>
+        <Col xs={4}></Col>
+        <Col xs={4}>
+          <img src={require("./assets/foodie.png")} alt="Logo"></img>
+        </Col>
+        <Col xs={4}></Col>
+      </Row>
+      <Row>
+        <Col xs={4}></Col>
+        <Col xs={4}>
+          {props.signup ? <SignupForm {...props} /> : <LoginForm {...props} />}
+        </Col>
+        <Col xs={4}></Col>
+      </Row>
+    </Container>
+  );
 }
