@@ -24,14 +24,15 @@ function Feed(props) {
 
         API.getAllRecipes()
           .then((res) => {
-            console.log(res);
+            //console.log(res.data);
             recipesArray = [...res.data];
+            console.log(recipesArray);
             //this has to be improved if there is scale involved
             for (let i = 0; i < recipesArray.length; i++) {
+              recipesArray[i].nickname = recipesArray[i].user ? recipesArray[i].user.nickname : "unknown";
               for (let j = 0; j < userRecipeStates.length; j++) {
                 if (recipesArray[i]._id === userRecipeStates[j].recipeId) {
                   recipesArray[i].likeState = userRecipeStates[j].likeStatus;
-                  recipesArray[i].nickname = recipesArray[i].user.nickname;
                   console.log(recipesArray[i]);
                 }
               }
