@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import UserContext from "../../utils/userContext";
 import API from "../../utils/API";
 
@@ -8,6 +8,8 @@ function Header(props) {
 
   const { loggedInState, setLoggedInState } = useContext(UserContext);
   const history = useHistory();
+  const [searchInput, setSearchInput] = useState({});
+
 
   // console.log(`Header loggedIn=${loggedInState.loggedIn}`);
   // console.log(loggedInState);
@@ -25,6 +27,16 @@ function Header(props) {
     localStorage.clear();
     setLoggedInState({ ...loggedInState, loggedIn: !loggedInState.loggedIn });
   };
+
+  const handleChange = (event) => {
+    setSearchInput(event.target.value);
+  }
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    // return <Redirect to={`/search/${searchInput}`}/>
+    history.push(`/search/${searchInput}`);
+  }
 
   if (!loggedInState.loggedIn) return null;
 
@@ -48,9 +60,9 @@ function Header(props) {
           {loggedInState.loggedIn ? "logout" : "login"}
         </Nav.Link>
       </Nav>
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-danger">Search</Button>
+      <Form inline onSubmit={handleSearch}>
+        <FormControl type="text" placeholder="Search" onChange={handleChange} className="mr-sm-2" />
+        <Button variant="outline-danger" type="submit">Search</Button>
       </Form>
     </Navbar>
   );

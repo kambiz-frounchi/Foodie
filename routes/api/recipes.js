@@ -5,6 +5,8 @@ const path = require("path");
 
 router.route("/find").post(recipesController.find);
 
+router.route("/search").post(recipesController.textSearch);
+
 router.route("/").get(recipesController.findAll).post(recipesController.create);
 
 router.route("/:id").get(recipesController.getRecipe);

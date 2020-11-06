@@ -9,6 +9,7 @@ import {
 import "./App.css";
 import Feed from "./pages/Feed";
 import FindRecipe from "./pages/FindRecipe";
+import SearchRecipe from "./pages/SearchRecipe";
 import PostRecipe from "./pages/PostRecipe";
 import Recipe from "./pages/Recipe";
 import UserProfile from "./pages/UserProfile";
@@ -44,6 +45,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute exact path={["/find"]}>
                 <FindRecipe />
+              </PrivateRoute>
+              <PrivateRoute exact path={["/search/:search"]}>
+                <SearchRecipe />
               </PrivateRoute>
               <PrivateRoute exact path={["/post"]}>
                 <PostRecipe />

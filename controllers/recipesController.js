@@ -37,6 +37,22 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
+  textSearch: function (req, res) {
+    console.log(req.body);
+    db.Recipe.find({
+      $or: [
+        { name: { $regex: req.body.search, $options: "i" } },
+        { description: { $regex: req.body.search, $options: "i" } },
+      ],
+    })
+      .populate("user")
+      .sort({ createdDate: -1 })
+      .then((dbModels) => {
+        console.log(dbModels);
+        res.json(dbModels);
+      })
+      .catch((err) => res.status(422).json(err));
+  },
   findAll: function (req, res) {
     console.log(req.body);
     db.Recipe.find({})
