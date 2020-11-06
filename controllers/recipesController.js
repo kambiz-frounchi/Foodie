@@ -44,14 +44,12 @@ module.exports = {
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
-
   getRecipe: function (req, res) {
-    console.log(req.params)
-    db.Recipe.find({_id : req.params.id})
+    console.log(req.params);
+    db.Recipe.findOne({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
   create: function (req, res) {
     console.log(req.body);
     addIngredients(req.body.ingredients).then((ingredients) => {
@@ -105,23 +103,42 @@ module.exports = {
     const imageName = req.params.id;
     res.sendFile(path.join(__dirname, "../images", imageName));
   },
+  updateLikeCount: function (req, res) {
+    console.log(req.body);
+
+    db.UserRecipeState.findOneAndUpdate(
+      { userId: req.body.userId, recipeId: req.body.recipeId },
+      { $set: { likeStatus: req.body.likeStatus } },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    ).then((result) => console.log("db.UserRecipeState", result));
+
+    if (req.body.likeStatus) {
+      db.Recipe.update({ _id: req.body.recipeId }, { $inc: { likes: 1 } })
+        .then((dbModels) => res.json(dbModels))
+        .catch((err) => res.status(422).json(err));
+    } else {
+      db.Recipe.update({ _id: req.body.recipeId }, { $inc: { likes: -1 } })
+        .then((dbModels) => res.json(dbModels))
+        .catch((err) => res.status(422).json(err));
+    }
+  },
 };
 
 const addTags = (tags) => {
   if (!tags) return Promise.resolve();
-  const tagsArray = tags.split(',');
+  const tagsArray = tags.split(",");
   console.log(tagsArray);
   return Promise.all(
     tagsArray.map((tag) => {
       // See if the tag already exists
-      return db.Tag.findOne({name: tag})
+      return db.Tag.findOne({ name: tag })
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no tag exists, create one
-          return db.Tag({name: tag}).save(); // Returns a promise
+          return db.Tag({ name: tag }).save(); // Returns a promise
         });
     })
   );
@@ -129,19 +146,19 @@ const addTags = (tags) => {
 
 const addIngredients = (ingredients) => {
   if (!ingredients) return Promise.resolve();
-  const ingredientsArray = ingredients.split(',');
+  const ingredientsArray = ingredients.split(",");
   console.log(ingredientsArray);
   return Promise.all(
     ingredientsArray.map((ingredient) => {
       // See if the ingredient already exists
-      return db.Ingredient.findOne({name: ingredient})
+      return db.Ingredient.findOne({ name: ingredient })
         .exec()
         .then((doc) => {
           if (doc) {
             return doc;
           }
           // If no ingredient exists, create one
-          return db.Ingredient({name: ingredient}).save(); // Returns a promise
+          return db.Ingredient({ name: ingredient }).save(); // Returns a promise
         });
     })
   );
@@ -149,7 +166,7 @@ const addIngredients = (ingredients) => {
 
 const addCuisine = (cuisines) => {
   if (!cuisines) return Promise.resolve();
-  const cuisinesArray = cuisines.split(',');
+  const cuisinesArray = cuisines.split(",");
   console.log(cuisinesArray);
   return Promise.all(
     cuisinesArray.map((cuisine) => {

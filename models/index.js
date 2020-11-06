@@ -4,5 +4,6 @@ module.exports = {
     Comment: require("./user").Comment,
     Tag: require("./tag").Tag,
     Ingredient: require("./ingredient").Ingredient,
-    Cuisine: require("./cuisine").Cuisine
+    Cuisine: require("./cuisine").Cuisine,
+    UserRecipeState: require("./userRecipeState").UserRecipeState
 };
