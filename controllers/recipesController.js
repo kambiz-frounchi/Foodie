@@ -19,7 +19,7 @@ module.exports = {
       const cuisines = req.body.cuisines.map((cuisine) =>
         mongoose.Types.ObjectId(cuisine._id)
       );
-      query.cuisine = { $in: cuisines };
+      query.cuisines = { $in: cuisines };
     }
     if (req.body.tags && req.body.tags.length > 0) {
       const tags = req.body.tags.map((tag) => mongoose.Types.ObjectId(tag._id));
