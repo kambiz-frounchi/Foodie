@@ -36,6 +36,7 @@ function Header(props) {
     event.preventDefault();
     // return <Redirect to={`/search/${searchInput}`}/>
     history.push(`/search/${searchInput}`);
+    window.location.reload(true);
   }
 
   if (!loggedInState.loggedIn) return null;

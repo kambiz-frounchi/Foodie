@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import API from "../../utils/API";
+import { DateTime } from "luxon";
 
 function FeedRecipe(props) {
   const [likeCounter, setLikeCounter] = useState(
@@ -48,6 +49,9 @@ function FeedRecipe(props) {
           <a href={`/recipe/${props.id}`}><Card.Title>{props.name}</Card.Title></a>
           <Card.Subtitle className="mb-2 text-muted">
             by {props.nickname}
+          </Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted">
+            {DateTime.fromISO(props.createdDate).toLocaleString(DateTime.DATE_FULL)}
           </Card.Subtitle>
           <Card.Text>{props.description ? props.description.substring(0,100) : ""}...</Card.Text>
           <Button variant="primary" disabled={props.likeDisabled ? true : false} onClick={handleLikeButtonClick}>
