@@ -33,10 +33,10 @@ function UserProfile() {
             console.log(res);
             recipesArray = [...res.data];
             for (let i = 0; i < recipesArray.length; i++) {
+              recipesArray[i].nickname = recipesArray[i].user ? recipesArray[i].user.nickname : "unknown";
               for (let j = 0; j < userRecipeStates.length; j++) {
                 if (recipesArray[i]._id === userRecipeStates[j].recipeId) {
                   recipesArray[i].likeState = userRecipeStates[j].likeStatus;
-                  recipesArray[i].nickname = recipesArray[i].user.nickname;
                   console.log(recipesArray[i]);
                 }
               }
@@ -74,6 +74,7 @@ function UserProfile() {
                 <Col md={4}></Col>
                 <Col md={4}>
                   <FeedRecipe
+                    createdDate={recipe.createdDate}
                     id={recipe._id}
                     name={recipe.name}
                     nickname={recipe.nickname}

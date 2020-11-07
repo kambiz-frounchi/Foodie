@@ -35,6 +35,7 @@ function SearchRecipe() {
                   <Col md={4}></Col>
                   <Col md={4}>
                     <FeedRecipe
+                      createdDate={recipe.createdDate}
                       id={recipe._id}
                       name={recipe.name}
                       nickname={recipe.user.nickname}
