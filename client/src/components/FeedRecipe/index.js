@@ -42,7 +42,7 @@ function FeedRecipe(props) {
       <Card style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
-          src={`/api/recipes/images/${props.img}`}
+          src={props.img}
           alt="recipe image"
         />
         <Card.Body>
