@@ -91,32 +91,32 @@ module.exports = {
           console.log("tags", tags);
           console.log("cuisines", cuisines);
 
-          let imageName = null;
-          if (req.files && Object.keys(req.files).length) {
-            console.log(req.files);
-            const recipeImageFile = req.files.image;
-            imageName = req.files.image.name;
-            const recipeImageSavePath = path.join(
-              __dirname,
-              "../images/",
-              recipeImageFile.name
-            );
+          // let imageName = null;
+          // if (req.files && Object.keys(req.files).length) {
+          //   console.log(req.files);
+          //   const recipeImageFile = req.files.image;
+          //   imageName = req.files.image.name;
+          //   const recipeImageSavePath = path.join(
+          //     __dirname,
+          //     "../images/",
+          //     recipeImageFile.name
+          //   );
 
-            console.log(__dirname);
-            console.log(recipeImageSavePath);
-            recipeImageFile.mv(recipeImageSavePath, (err) => {
-              if (err) {
-                console.log(err);
-              }
-            });
-          }
+          //   console.log(__dirname);
+          //   console.log(recipeImageSavePath);
+          //   recipeImageFile.mv(recipeImageSavePath, (err) => {
+          //     if (err) {
+          //       console.log(err);
+          //     }
+          //   });
+          // }
 
           db.Recipe.create({
             user: req.body.userId,
             createdDate: req.body.createdDate,
             name: req.body.name,
             description: req.body.description,
-            image: imageName ? imageName : "none",
+            image: req.body.imageUrl,//imageName ? imageName : "none",
             time: req.body.time,
             difficulty: req.body.difficulty,
             cuisines: cuisines,

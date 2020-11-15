@@ -17,7 +17,7 @@ export default function RecipeContent(props) {
       <h6>By {props.nickname}</h6>
       <img
         width="500"
-        src={`/api/recipes/images/${props.img}`}
+        src={props.img}
         alt={props.name}
       ></img>
       <br/><br/>
