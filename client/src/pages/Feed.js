@@ -47,7 +47,7 @@ function Feed(props) {
   }
 
   return (
-    <Container className="no-border">
+    <Container>
       {recipes.length ? (
         <ListGroup>
           {recipes.map((recipe) => (
