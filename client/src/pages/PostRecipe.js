@@ -61,15 +61,18 @@ function PostRecipe() {
 
     console.log("uploading ...");
 
-    API.uploadFile(formObject.image, signedRequest);
-  
-    API.postRecipe(formData)
-      .then((response) => {
-        console.log(response);
-        history.push("/");
+    API.uploadFile(formObject.image, signedRequest)
+      .then(()=> {
+        API.postRecipe(formData)
+        .then((response) => {
+          console.log(response);
+          history.push("/");
+        })
+        .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div>
       <h1 style={{ padding: "20px" }}>Post a Recipe</h1>

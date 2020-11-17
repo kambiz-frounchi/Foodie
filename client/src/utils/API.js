@@ -97,19 +97,37 @@ export default {
     return axios.get(`/api/userrecipestates/${userId}`);
   },
 
-  uploadFile: function (file, signedRequest) {
+  uploadFile: async function (file, signedRequest) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", signedRequest);
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.log("OK");
-        } else {
-          alert("Could not upload file.");
+    return new Promise((resolve, reject) => {
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log("OK");
+            resolve("OK");
+          } else {
+            console.log("Could not upload file.");
+            reject("Could not upload file.");
+            //alert("Could not upload file.");
+          }
         }
-      }
-    };
-    xhr.send(file);
+      };
+      xhr.send(file);
+    });
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("PUT", signedRequest);
+    // xhr.onreadystatechange = () => {
+    //   if (xhr.readyState === 4) {
+    //     if (xhr.status === 200) {
+    //       console.log("OK");
+    //     } else {
+    //       alert("Could not upload file.");
+    //     }
+    //   }
+    // };
+    // xhr.send(file);
   },
 
   async getSignedRequest(file) {

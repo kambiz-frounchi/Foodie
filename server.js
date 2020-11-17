@@ -14,8 +14,8 @@ const fileUpload = require("express-fileupload");
 const S3_BUCKET = process.env.S3_BUCKET || "foodiebucket";
 
 const credentials = new aws.Credentials({
-	accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
-	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "" 
+	accessKeyId: process.env.AWS_ACCESS_KEY_ID || "AKIAJUEZFA2KUBQK6YGA",
+	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "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" 
 });
 
 aws.config.region = "us-east-2";
