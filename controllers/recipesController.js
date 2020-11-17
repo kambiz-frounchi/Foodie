@@ -68,6 +68,7 @@ module.exports = {
     .populate("ingredients")
     .populate("cuisines")
     .populate("tags")
+    .sort({ createdDate: -1 })
       .then((dbModels) => res.json(dbModels))
       .catch((err) => res.status(422).json(err));
   },
