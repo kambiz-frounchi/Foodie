@@ -27,14 +27,15 @@ function PostRecipe() {
     setFormObject({ ...formObject, [name]: value });
   };
 
-  const handleFileSelect = async (images) => {
+  const handleFileSelect = (images) => {
     console.log(images[0]);
-    let {url, signedRequest} = await API.getSignedRequest(images[0]);
-    console.log(url);
-    setFormObject({ ...formObject, image: images[0], imageUrl: url, imagePostUrl: signedRequest });
+    //let {url, signedRequest} = await API.getSignedRequest(images[0]);
+    //console.log(url);
+    //setFormObject({ ...formObject, image: images[0], imageUrl: url, imagePostUrl: signedRequest });
+    setFormObject({ ...formObject, image: images[0] });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("submitHandler");
     const formData = new FormData();
@@ -44,19 +45,23 @@ function PostRecipe() {
     formObject.userId = loggedInState.id;
     formObject.createdDate = new Date();
 
+    let {url, signedRequest} = await API.getSignedRequest(formObject.image);
+    console.log(url);
+    formData.append("imageUrl", url); 
+
     for (const [key, value] of Object.entries(formObject)) {
       console.log(key);
       console.log(value);
-      if (key != "imagePostUrl") {
+      //if (key != "imagePostUrl") {
         formData.append(key, value);
-      } 
+      //}
     }
 
     console.log(formObject);
 
     console.log("uploading ...");
 
-    API.uploadFile(formObject.image, formObject.imagePostUrl);
+    API.uploadFile(formObject.image, signedRequest);
   
     API.postRecipe(formData)
       .then((response) => {
