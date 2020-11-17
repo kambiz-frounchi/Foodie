@@ -36,14 +36,14 @@ export default function RecipeContent(props) {
       <h6>Cuisines:</h6>
       <ListGroup>
         {props.cuisines.map((cuisine) => (
-          <ListGroup.Item key={cuisine._id}>{cuisine.name}</ListGroup.Item>
+          <ListGroup.Item style={{width: "250px"}} key={cuisine._id}>{cuisine.name}</ListGroup.Item>
         ))}
       </ListGroup>
       <br/>
       <h6>Ingredients:</h6>
       <ListGroup>
         {props.ingredients.map((ingredient) => (
-          <ListGroup.Item key={ingredient._id}>
+          <ListGroup.Item style={{width: "250px"}} key={ingredient._id}>
             {ingredient.name}
           </ListGroup.Item>
         ))}
@@ -52,7 +52,7 @@ export default function RecipeContent(props) {
       <h6>Tags:</h6>
       <ListGroup>
         {props.tags.map((tag) => (
-          <ListGroup.Item key={tag._id}>{tag.name}</ListGroup.Item>
+          <ListGroup.Item style={{width: "250px"}} key={tag._id}>{tag.name}</ListGroup.Item>
         ))}
       </ListGroup>
       <br/>

@@ -60,9 +60,9 @@ function App() {
               </Route>
               <Route exact path={["/public/images"]}>
                 <Login />
-              </Route> 
+              </Route>
               <Route exact path={"/upload"}>
-                <FileUploadTest/>
+                <FileUploadTest />
               </Route>
             </Switch>
           </Wrapper>
@@ -82,13 +82,13 @@ function App() {
           loggedInState.loggedIn ? (
             children
           ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
-            />
-          )
+              <Redirect
+                to={{
+                  pathname: "/login",
+                  state: { from: location },
+                }}
+              />
+            )
         }
       />
     );
