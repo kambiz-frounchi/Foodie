@@ -51,7 +51,7 @@ function Feed(props) {
       {recipes.length ? (
         <ListGroup>
           {recipes.map((recipe) => (
-            <ListGroup.Item key={recipe._id}>
+            <ListGroup.Item key={recipe._id} style={{border: "none"}}>
               <Row>
                 <Col md={4}></Col>
                 <Col md={4}>

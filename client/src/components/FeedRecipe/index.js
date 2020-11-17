@@ -39,7 +39,7 @@ function FeedRecipe(props) {
 
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "25rem" }}>
         <Card.Img
           variant="top"
           src={props.img}
